@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "login_title": "Ingrese a su cuenta",
+    "register_title": "Registra tu cuenta",
+    "account_was_successfully_created": "La cuenta fue creada exitosamente",
+    "do_not_have_an_account": "¿No tiene una cuenta?",
+    "already_have_an_account": "¿Ya tienes una cuenta?",
+    "fields": {
+      "email": "Correo electrónico",
+      "first_name": "Nombre de pila",
+      "last_name": "Apellido",
+      "password": "Contraseña"
+    },
+    "actions": {
+      "login": "Acceso",
+      "register": "Registro",
+      "create_an_account": "Crea una cuenta"
+    }
+  },
+  "validation_errors": {
+    "invalid_email": "Email inválido",
+    "email_is_required": "correo electronico es requerido",
+    "first_name_is_required": "Se requiere el primer nombre",
+    "last_name_is_required": "Se requiere apellido",
+    "password_is_required": "se requiere contraseña"
+  },
+  "errors": {
+    "something_goes_wrong": "Algo va mal"
+  }
+}

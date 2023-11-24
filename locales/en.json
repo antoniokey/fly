@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "login_title": "Login to your account",
+    "register_title": "Register your account",
+    "account_was_successfully_created": "Account was successfully created",
+    "do_not_have_an_account": "Do not have an account?",
+    "already_have_an_account": "Already have an account?",
+    "fields": {
+      "email": "Email",
+      "first_name": "First name",
+      "last_name": "Last name",
+      "password": "Password"
+    },
+    "actions": {
+      "login": "Login",
+      "register": "Register",
+      "create_an_account": "Create an account"
+    }
+  },
+  "validation_errors": {
+    "invalid_email": "Invalid email",
+    "email_is_required": "Email is required",
+    "first_name_is_required": "First name is required",
+    "last_name_is_required": "Last name is required",
+    "password_is_required": "Password is required"
+  },
+  "errors": {
+    "something_goes_wrong": "Something goes wrong"
+  }
+}

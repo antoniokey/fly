@@ -1,0 +1,11 @@
+.home-page {
+  height: 100vh;
+
+  &__auth {
+    @apply flex flex-col items-center relative top-[50%] translate-y-[-50%] gap-[20px];
+
+    &-title {
+      @apply font-bold text-[25px];
+    }
+  }
+}
