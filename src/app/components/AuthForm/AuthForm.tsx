@@ -179,8 +179,8 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
         >
           {
             authType === 'login'
-              ? translate('auth.actions.login')
-              : translate('auth.actions.create_an_account')
+              ? translate('auth.actions.create_an_account')
+              : translate('auth.actions.login')
           }
         </span>
       </div>
