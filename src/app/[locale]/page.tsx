@@ -13,7 +13,7 @@ import Logo from '../../../public/logos/logo.png';
 
 import AuthForm from '../components/AuthForm/AuthForm';
 
-export default function Home() {
+export default function HomePage() {
   const [authType, setAuthType] = useState('login');
 
   const { t: translate, i18n } = useTranslation();
@@ -23,7 +23,7 @@ export default function Home() {
 
   useEffect(() => {
     if (session.status === 'authenticated') {
-      router.push(`/${i18n.language}/users/${session.data.user.id}`);
+      router.push(`/${i18n.language}/conversations`);
     }
   }, [session.status, router]);
   

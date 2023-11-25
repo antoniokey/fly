@@ -26,5 +26,8 @@
   },
   "errors": {
     "something_goes_wrong": "Algo va mal"
+  },
+  "chat": {
+    "empty": "Seleccione un chat o inicie una nueva conversación"
   }
 }

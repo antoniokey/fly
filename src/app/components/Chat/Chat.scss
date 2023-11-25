@@ -1,0 +1,7 @@
+.chat {
+  @apply py-[25px] px-[15px] h-full w-[70%];
+
+  &__empty {
+    @apply font-bold text-[18px] flex justify-center items-center h-full;
+  }
+}

@@ -1,0 +1,9 @@
+.side-bar {
+  @apply flex gap-[0px] w-[30%] h-full;
+
+  box-shadow: 5px 0 5px -5px rgba(50, 50, 93, 0.25);
+
+  &__divider {
+    @apply w-[2px] bg-gray-200;
+  }
+}

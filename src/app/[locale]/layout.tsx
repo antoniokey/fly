@@ -24,7 +24,7 @@ export default function RootLayout({
       <head>
         <link rel="shortcut icon" href={Logo.src} />
       </head>
-      <body>
+      <body className="h-[100vh]">
         <AuthProvider>
           <TranslationsProvider locale={locale}>
             {children}

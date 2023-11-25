@@ -1,0 +1,15 @@
+.menu {
+  @apply flex flex-col content-between p-[25px];
+
+  &__navigation-items {
+    @apply flex flex-col gap-[25px];
+
+    svg {
+      @apply text-[30px] text-gray-400 cursor-pointer;
+
+      &.selected {
+        @apply text-primary;
+      }
+    }
+  }
+}
