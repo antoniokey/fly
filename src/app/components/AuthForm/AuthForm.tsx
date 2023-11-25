@@ -2,6 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 import { signIn } from 'next-auth/react';
 
@@ -12,7 +13,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import './AuthForm.scss';
 
 import { getAuthFormValidationSchema } from '@/app/constants/validation/auth-form.validation';
-import { useTranslation } from 'react-i18next';
 
 interface AuthFormProps {
   authType: string;
@@ -161,8 +161,6 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
           }
         </button>
       </form>
-
-      <div className='auth-form__devider'></div>
 
       <div className='auth-form__form-type-switcher'>
         <span className="auth-form__switcher-label">
