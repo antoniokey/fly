@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 import './HomePage.scss';
@@ -14,7 +16,16 @@ import AuthForm from '../components/AuthForm/AuthForm';
 export default function Home() {
   const [authType, setAuthType] = useState('login');
 
-  const { t: translate } = useTranslation();
+  const { t: translate, i18n } = useTranslation();
+
+  const session = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.status === 'authenticated') {
+      router.push(`/${i18n.language}/users/${session.data.user.id}`);
+    }
+  }, [session.status, router]);
   
   return (
     <div className='home-page'>

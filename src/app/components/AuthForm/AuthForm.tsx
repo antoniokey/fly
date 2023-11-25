@@ -42,10 +42,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
       try {
         await signIn(
           'credentials',
-          {
-            ...data,
-            redirect: false,
-          },
+          { ...data, redirect: false },
         );
       } catch(error) {
         toast.error(translate('errors.something_goes_wrong'));

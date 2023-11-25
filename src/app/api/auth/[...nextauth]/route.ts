@@ -13,11 +13,11 @@ export const nextAuthOptions: NextAuthOptions = {
     CredentialsProvider({
       credentials: {
         email: {
-          label: 'Email',
-          type: 'email',
+          label: 'email',
+          type: 'text',
         },
         password: {
-          label: 'Password',
+          label: 'password',
           type: 'password'
         },
       },
@@ -40,7 +40,9 @@ export const nextAuthOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        return user;
+        const { password, ...userResponse } = user;
+
+        return userResponse;
       },
     }),
   ],
@@ -48,6 +50,24 @@ export const nextAuthOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.uid;
+      }
+
+      return session;
+    },
+
+    jwt({ user, token }) {
+      if (user) {
+        token.uid = user.id;
+      }
+
+      return token;
+    },
+  },
+  debug: process.env.NODE_ENV === 'development',
 };
 
 const handler = NextAuth(nextAuthOptions);
