@@ -8,6 +8,8 @@ import { signIn } from 'next-auth/react';
 
 import axios from 'axios';
 
+import randomColor from 'randomcolor';
+
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import './AuthForm.scss';
@@ -32,6 +34,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<AuthFormModel>({
     resolver: yupResolver(getAuthFormValidationSchema(authType, translate)),
@@ -42,21 +45,33 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
       try {
         await signIn(
           'credentials',
-          { ...data, redirect: false },
+          {
+            ...data,
+            redirect: false,
+          },
         );
-      } catch(error) {
-        toast.error(translate('errors.something_goes_wrong'));
+      } catch(error: any) {
+        toast.error(error.response?.data || error.message || translate('errors.something_goes_wrong'));
       }
     } else {
       try {
-        await axios.post('/api/register', data);
+        await axios.post(
+          '/api/register',
+          {
+            ...data,
+            image_color: randomColor(),
+            image: null,
+          },
+        );
 
         toast.success(translate('auth.account_was_successfully_created'));
 
         setAuthType('login');
-      } catch(error) {
-        toast.error(translate('errors.something_goes_wrong'));
+      } catch(error: any) {
+        toast.error(error.response?.data || error.message || translate('errors.something_goes_wrong'));
       }
+
+      reset();
     }
   };
 

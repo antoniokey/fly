@@ -2,8 +2,6 @@
 
 import Image from 'next/image';
 
-import randomColor from 'randomcolor';
-
 import './Avatar.scss';
 
 interface AvatarProps {
@@ -11,12 +9,10 @@ interface AvatarProps {
 }
 
 export default function Avatar({ user }: AvatarProps) {
-  const color = !user.image ? randomColor() : '';
-
   return (
     <div
       className='avatar'
-      style={{ background: color }}
+      style={user.image_color && { background: user.image_color }}
     >
       {
         user.image

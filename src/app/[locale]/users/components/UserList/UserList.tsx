@@ -18,12 +18,14 @@ export default function UserList({ users }: UserListProps) {
         {translate('users.users_list_title')}
       </div>
 
-      {users.map(user => (
-        <User
-          key={user.id}
-          user={user}
-        />
-      ))}
+      <div className="user-list__users">
+        {users.map(user => (
+          <User
+            key={user.id}
+            user={user}
+          />
+        ))}
+      </div>
     </div>
   );
 }
