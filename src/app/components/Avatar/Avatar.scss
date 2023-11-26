@@ -1,0 +1,11 @@
+.avatar {
+  @apply w-[50px] h-[50px] rounded-[50%];
+
+  &__image {
+    @apply w-full h-full;
+  }
+
+  &__first-letters {
+    @apply flex justify-center items-center text-white h-full text-[20px];
+  }
+}

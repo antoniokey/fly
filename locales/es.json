@@ -29,5 +29,8 @@
   },
   "chat": {
     "empty": "Seleccione un chat o inicie una nueva conversación"
+  },
+  "users": {
+    "users_list_title": "Gente"
   }
 }

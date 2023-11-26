@@ -1,0 +1,8 @@
+.user-list {
+  @apply flex flex-col gap-[30px] w-full;
+
+  &__title {
+    font-weight: bold;
+    font-size: 25px;
+  }
+}
