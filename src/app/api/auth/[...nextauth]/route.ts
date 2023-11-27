@@ -53,7 +53,7 @@ export const nextAuthOptions: NextAuthOptions = {
   callbacks: {
     session({ session, token }) {
       if (session.user) {
-        session.user.id = token.uid;
+        session.user = token.user;
       }
 
       return session;
@@ -61,7 +61,7 @@ export const nextAuthOptions: NextAuthOptions = {
 
     jwt({ user, token }) {
       if (user) {
-        token.uid = user.id;
+        token.user = user;
       }
 
       return token;

@@ -1,0 +1,32 @@
+.chat-header {
+  @apply flex justify-between items-center px-[20px] h-[80px] border-b-gray-300 border-b-[1px];
+
+  &__user {
+    @apply flex gap-[10px];
+
+    &-info {
+      @apply flex flex-col justify-center;
+    }
+  }
+
+  &__first-last-name {
+    @apply flex gap-[5px] font-bold
+  }
+
+  &__status {
+    @apply text-gray-400;
+  }
+
+  &__settings-menu {
+    top: 55px !important;
+    left: 1290px !important;
+
+    a:focus {
+      box-shadow: none !important;
+    }
+  }
+
+  &__settings-button {
+    @apply text-[30px] text-primary cursor-pointer;
+  }
+}

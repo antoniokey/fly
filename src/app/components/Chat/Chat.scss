@@ -1,5 +1,9 @@
 .chat {
-  @apply py-[25px] px-[15px] h-full w-[70%];
+  @apply h-full;
+
+  &__body {
+    @apply h-full;
+  }
 
   &__empty {
     @apply font-bold text-[18px] flex justify-center items-center h-full;

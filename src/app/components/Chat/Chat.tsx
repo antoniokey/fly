@@ -4,19 +4,33 @@ import { useTranslation } from 'react-i18next';
 
 import './Chat.scss';
 
-import { useConversation } from '@/app/hooks/useConversation';
+import Messages from './Messages/Messages';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
 
-export default function Chat() {
-  const [isOpen] = useConversation();
+interface Chat {
+  isOpen: boolean;
+}
 
+export default function Chat({ isOpen }: Chat) {
   const { t: translate } = useTranslation();
 
   return (
     <div className="chat">
       {
         isOpen
-          ? 'Chat opened'
-          : <span className="chat__empty">{translate('chat.empty')}</span>
+          ? (
+              <div className="chat__body">
+                <Header />
+                <Messages />
+                <Footer />
+              </div>
+            )
+          : (
+              <span className="chat__empty">
+                {translate('chat.empty')}
+              </span>
+            )
       }
     </div>
   );

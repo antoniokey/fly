@@ -11,7 +11,7 @@ interface UserProps {
 export default function User({ user }: UserProps) {
   return (
     <div className="user">
-      <Avatar user={user} />
+      <Avatar user={user} status='online' />
 
       <div className="user__info">
         <span className="user__first-name">

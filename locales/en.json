@@ -28,7 +28,10 @@
     "something_goes_wrong": "Something goes wrong"
   },
   "chat": {
-    "empty": "Select a chat or start a new conversation"
+    "empty": "Select a chat or start a new conversation",
+    "settings_menu": {
+      "leave": "Leave"
+    }
   },
   "users": {
     "users_list_title": "People"

@@ -1,5 +1,13 @@
 .avatar {
-  @apply w-[50px] h-[50px] rounded-[50%];
+  @apply w-[50px] h-[50px] rounded-[50%] relative;
+
+  &__status {
+    @apply absolute w-[15px] h-[15px] rounded-[50%] right-0;
+
+    &.online {
+      @apply bg-green-500;
+    }
+  }
 
   &__image {
     @apply w-full h-full;

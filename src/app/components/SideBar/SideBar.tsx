@@ -9,8 +9,6 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
     <div className="side-bar">
       <Menu />
 
-      <div className="side-bar__divider"></div>
-
       <div className="side-bar__data">
         {children}
       </div>

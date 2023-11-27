@@ -2,7 +2,11 @@ import type { Metadata } from 'next';
 
 import { Slide, ToastContainer } from 'react-toastify';
 
+import { PrimeReactProvider } from 'primereact/api';
+
 import 'react-toastify/dist/ReactToastify.css';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.css';
 import './globals.css';
 
 import Logo from '../../../public/logos/logo.png';
@@ -27,7 +31,9 @@ export default function RootLayout({
       <body className="h-[100vh]">
         <AuthProvider>
           <TranslationsProvider locale={locale}>
-            {children}
+            <PrimeReactProvider>
+              {children}
+            </PrimeReactProvider>
 
             <ToastContainer
               position="bottom-right"

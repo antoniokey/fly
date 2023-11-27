@@ -1,0 +1,34 @@
+.chat-footer {
+  @apply flex items-center h-[75px] gap-[15px] border-t-gray-300 border-t-[1px] px-[10px];
+
+  &__form {
+    @apply w-full;
+
+    input {
+      @apply
+        h-[40px]
+        rounded-[25px]
+        px-[10px]
+        text-[15px]
+        outline-none
+        border-[1px]
+        border-gray-300
+        w-full
+        bg-gray-50;
+    }
+  }
+
+  &__send-button {
+    @apply
+      rounded-[50%]
+      bg-primary
+      h-[40px]
+      w-[40px]
+      text-white
+      text-[20px]
+      flex
+      justify-center
+      items-center
+      cursor-pointer;
+  }
+}

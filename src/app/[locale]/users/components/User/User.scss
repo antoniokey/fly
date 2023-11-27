@@ -1,7 +1,7 @@
 .user {
-  @apply flex gap-[15px] p-[10px] hover:cursor-pointer hover:bg-gray-100 hover:rounded-[10px];
+  @apply flex items-center gap-[15px] p-[10px] hover:cursor-pointer hover:bg-gray-100 hover:rounded-[10px];
 
   &__info {
-    @apply flex flex-col font-bold;
+    @apply flex gap-[5px] font-bold;
   }
 }
