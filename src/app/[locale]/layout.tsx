@@ -13,6 +13,7 @@ import Logo from '../../../public/logos/logo.png';
 
 import TranslationsProvider from '../providers/TranslationsProvider';
 import AuthProvider from '../providers/AuthProvider';
+import SocketProvider from '../providers/SocketProvider';
 
 export const metadata: Metadata = { title: 'Fly' };
 
@@ -32,7 +33,9 @@ export default function RootLayout({
         <AuthProvider>
           <TranslationsProvider locale={locale}>
             <PrimeReactProvider>
-              {children}
+              <SocketProvider>
+                {children}
+              </SocketProvider>
             </PrimeReactProvider>
 
             <ToastContainer

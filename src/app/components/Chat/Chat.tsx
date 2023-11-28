@@ -2,6 +2,7 @@
 
 import { useTranslation } from 'react-i18next';
 
+import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 
 import axios from 'axios';
@@ -25,6 +26,7 @@ export default function Chat(
     conversation,
   }: Chat,
 ) {
+  const session = useSession();
   const router = useRouter();
   const params = useParams();
 
@@ -44,15 +46,16 @@ export default function Chat(
       conversationId = createdConversation.id;
     }
 
-    await axios.post('/api/messages', {
-      conversationId: conversationId,
+    await axios.post('/api/socket/messages', {
+      session,
+      conversationId,
       receiverId: conversation.receiver.id,
       message: data.message,
     });
   };
 
   const onLeaveChat = async () => {
-    await axios.delete(`/api/conversations/${params.id}`);
+    await axios.delete(`/api/conversations/${params?.id}`);
 
     router.back();
     router.refresh();

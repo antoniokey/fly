@@ -3,8 +3,6 @@
 import { useForm } from 'react-hook-form';
 import { VscSend } from 'react-icons/vsc';
 
-import axios from 'axios';
-
 import './Footer.scss';
 
 interface FooterProps {
@@ -16,7 +14,10 @@ export default function Footer({ onSendMessage }: FooterProps) {
 
   return (
     <div className="chat-footer">
-      <form className="chat-footer__form">
+      <form
+        className="chat-footer__form"
+        onSubmit={handleSubmit(onSendMessage)}
+      >
         <input
           placeholder='Write a message'
           {...register('message')}
