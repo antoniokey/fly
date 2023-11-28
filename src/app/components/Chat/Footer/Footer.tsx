@@ -1,16 +1,30 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-
 import { VscSend } from 'react-icons/vsc';
+
+import axios from 'axios';
 
 import './Footer.scss';
 
-export default function Footer() {
+interface FooterProps {
+  receiver: any;
+}
+
+export default function Footer({ receiver }: FooterProps) {
   const { handleSubmit, register } = useForm();
 
-  const onFormSubmit = (data: any) => {
-    console.log(data)
+  const onFormSubmit = async (data: any) => {
+    const createdConversation = (await axios.post(
+      '/api/conversations',
+      { receiverId: receiver.id },
+    )).data;
+
+    await axios.post('/api/messages', {
+      conversationId: createdConversation.id,
+      receiverId: receiver.id,
+      message: data.message,
+    });
   };
 
   return (

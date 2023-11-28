@@ -4,8 +4,6 @@ import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiDotsHorizontal } from 'react-icons/hi';
 
-import { useSession } from 'next-auth/react';
-
 import { Menu } from 'primereact/menu';
 
 import './Header.scss';
@@ -14,8 +12,11 @@ import { getHeaderSettingsMenuItems } from '@/app/constants/chat.constants';
 
 import Avatar from '../../Avatar/Avatar';
 
-export default function Header() {
-  const session = useSession();
+interface HeaderProps {
+  receiver: any;
+}
+
+export default function Header({ receiver }: HeaderProps) {
   const menuRef: any = useRef();
 
   const { t: translate } = useTranslation();
@@ -27,13 +28,13 @@ export default function Header() {
       <div className="chat-header__user">
         <Avatar
           status='online'
-          user={session.data?.user}
+          user={receiver}
         />
 
         <div className="chat-header__user-info">
           <div className="chat-header__first-last-name">
-            <span>{session.data?.user.first_name}</span>
-            <span>{session.data?.user.last_name}</span>
+            <span>{receiver.first_name}</span>
+            <span>{receiver.last_name}</span>
           </div>
 
           <div className="chat-header__status">

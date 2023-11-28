@@ -33,6 +33,9 @@
       "leave": "Leave"
     }
   },
+  "conversations": {
+    "conversations_list_title": "Conversations"
+  },
   "users": {
     "users_list_title": "People"
   }

@@ -10,9 +10,10 @@ import Footer from './Footer/Footer';
 
 interface Chat {
   isOpen: boolean;
+  receiver?: any;
 }
 
-export default function Chat({ isOpen }: Chat) {
+export default function Chat({ isOpen, receiver }: Chat) {
   const { t: translate } = useTranslation();
 
   return (
@@ -21,9 +22,9 @@ export default function Chat({ isOpen }: Chat) {
         isOpen
           ? (
               <div className="chat__body">
-                <Header />
+                <Header receiver={receiver} />
                 <Messages />
-                <Footer />
+                <Footer receiver={receiver} />
               </div>
             )
           : (
