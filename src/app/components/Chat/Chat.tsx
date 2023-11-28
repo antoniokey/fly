@@ -15,24 +15,38 @@ import Footer from './Footer/Footer';
 interface Chat {
   isOpen: boolean;
   isNewChat?: boolean;
-  receiver?: any;
+  conversation?: any;
 }
 
-export default function Chat({ isOpen, isNewChat = false, receiver }: Chat) {
+export default function Chat(
+  {
+    isOpen,
+    isNewChat = false,
+    conversation,
+  }: Chat,
+) {
   const router = useRouter();
   const params = useParams();
 
   const { t: translate } = useTranslation();
 
   const onSendMessage = async (data: any) => {
-    const createdConversation = (await axios.post(
-      '/api/conversations',
-      { receiverId: receiver.id },
-    )).data;
+    let conversationId;
+
+    if (conversation.id) {
+      conversationId = conversation.id;
+    } else {
+      const createdConversation = (await axios.post(
+        '/api/conversations',
+        { receiverId: conversation.receiver.id },
+      )).data;
+
+      conversationId = createdConversation.id;
+    }
 
     await axios.post('/api/messages', {
-      conversationId: createdConversation.id,
-      receiverId: receiver.id,
+      conversationId: conversationId,
+      receiverId: conversation.receiver.id,
       message: data.message,
     });
   };
@@ -51,11 +65,11 @@ export default function Chat({ isOpen, isNewChat = false, receiver }: Chat) {
           ? (
               <div className="chat__body">
                 <Header
-                  receiver={receiver}
+                  receiver={conversation.receiver}
                   isNewChat={isNewChat}
                   onLeaveChat={onLeaveChat}
                 />
-                <Messages />
+                <Messages messages={conversation.messages || []} />
                 <Footer onSendMessage={onSendMessage}/>
               </div>
             )

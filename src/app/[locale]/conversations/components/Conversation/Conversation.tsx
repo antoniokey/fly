@@ -36,10 +36,10 @@ export default function Conversation({ conversation }: Conversation) {
 
       <div className="conversation__info">
         <span className="conversation__first-name">
-          {conversation.receiver.first_name}
+          {conversation.receiver?.first_name || ''}
         </span>
         <span className="conversation__last-name">
-          {conversation.receiver.last_name}
+          {conversation.receiver?.last_name || ''}
         </span>
       </div>
     </div>

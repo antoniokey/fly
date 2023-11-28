@@ -8,7 +8,7 @@ export default async function ConversationPage({ params: { id } }: any) {
     <div className="conversation-page w-[70%]">
       <Chat 
         isOpen={true}
-        receiver={conversation.receiver}
+        conversation={conversation}
       />
     </div>
   );

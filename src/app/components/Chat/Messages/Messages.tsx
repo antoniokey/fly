@@ -2,8 +2,18 @@
 
 import './Messages.scss';
 
-export default function Messages() {
+interface MessagesProps {
+  messages: any[];
+}
+
+export default function Messages({ messages }: MessagesProps) {
   return (
-    <div className="chat-messages">Messages</div>
+    <div className="chat-messages">
+      {
+        messages.map((message, index) => (
+          <div key={index}>{message.message}</div>
+        ))
+      }
+    </div>
   );
 }

@@ -41,6 +41,9 @@ export const getConversation = async (id: number) => {
 
   const conversation = await prisma.conversations.findFirst({
     where: { id },
+    include: {
+      messages: true,
+    },
   });
 
   const conversationsReceiverId = (conversation?.participant_ids || []).filter(participant_id =>
