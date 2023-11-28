@@ -1,22 +1,22 @@
 'use client';
 
-import { useForm } from 'react-hook-form';
+import { FieldValues, UseFormReset, useForm } from 'react-hook-form';
 import { VscSend } from 'react-icons/vsc';
 
 import './Footer.scss';
 
 interface FooterProps {
-  onSendMessage: (data: any) => void;
+  onSendMessage: (resetMessageField: UseFormReset<FieldValues>) => (data: any) => void;
 }
 
 export default function Footer({ onSendMessage }: FooterProps) {
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, reset } = useForm();
 
   return (
     <div className="chat-footer">
       <form
         className="chat-footer__form"
-        onSubmit={handleSubmit(onSendMessage)}
+        onSubmit={handleSubmit(onSendMessage(reset))}
       >
         <input
           placeholder='Write a message'
@@ -26,7 +26,7 @@ export default function Footer({ onSendMessage }: FooterProps) {
 
       <div
         className="chat-footer__send-button"
-        onClick={handleSubmit(onSendMessage)}
+        onClick={handleSubmit(onSendMessage(reset))}
       >
         <VscSend />
       </div>

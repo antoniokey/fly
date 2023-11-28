@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 
+import { FieldValues, UseFormReset } from 'react-hook-form';
+
 import axios from 'axios';
 
 import './Chat.scss';
@@ -32,27 +34,30 @@ export default function Chat(
 
   const { t: translate } = useTranslation();
 
-  const onSendMessage = async (data: any) => {
-    let conversationId;
+  const onSendMessage = (resetMessageField: UseFormReset<FieldValues>) =>
+    async (data: any) => {
+      let conversationId;
 
-    if (conversation.id) {
-      conversationId = conversation.id;
-    } else {
-      const createdConversation = (await axios.post(
-        '/api/conversations',
-        { receiverId: conversation.receiver.id },
-      )).data;
+      if (conversation.id) {
+        conversationId = conversation.id;
+      } else {
+        const createdConversation = (await axios.post(
+          '/api/conversations',
+          { receiverId: conversation.receiver.id },
+        )).data;
 
-      conversationId = createdConversation.id;
-    }
+        conversationId = createdConversation.id;
+      }
 
-    await axios.post('/api/socket/messages', {
-      session,
-      conversationId,
-      receiverId: conversation.receiver.id,
-      message: data.message,
-    });
-  };
+      await axios.post('/api/socket/messages', {
+        session,
+        conversationId,
+        receiverId: conversation.receiver.id,
+        message: data.message,
+      });
+
+      resetMessageField();
+    };
 
   const onLeaveChat = async () => {
     await axios.delete(`/api/conversations/${params?.id}`);
