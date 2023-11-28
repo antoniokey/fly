@@ -24,6 +24,16 @@
     a:focus {
       box-shadow: none !important;
     }
+
+    &-leave {
+      span {
+        @apply text-red-500;
+      }
+    }
+  }
+
+  &__close-button {
+    @apply text-primary text-[35px] cursor-pointer;
   }
 
   &__settings-button {

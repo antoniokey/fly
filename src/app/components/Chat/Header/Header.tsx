@@ -3,6 +3,9 @@
 import { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HiDotsHorizontal } from 'react-icons/hi';
+import { IoCloseOutline } from 'react-icons/io5';
+
+import { useRouter } from 'next/navigation';
 
 import { Menu } from 'primereact/menu';
 
@@ -14,14 +17,16 @@ import Avatar from '../../Avatar/Avatar';
 
 interface HeaderProps {
   receiver: any;
+  isNewChat: boolean;
+  onLeaveChat: () => void;
 }
 
-export default function Header({ receiver }: HeaderProps) {
+export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps) {
+  const router = useRouter();
+
   const menuRef: any = useRef();
 
   const { t: translate } = useTranslation();
-
-  const onLeaveClick = () => {};
 
   return (
     <div className="chat-header">
@@ -43,22 +48,35 @@ export default function Header({ receiver }: HeaderProps) {
         </div>
       </div>
 
-      <Menu
-        popup
-        ref={menuRef}
-        model={
-          getHeaderSettingsMenuItems(
-            translate,
-            onLeaveClick,
-          )
-        }
-        className="chat-header__settings-menu"
-      />
-
-      <HiDotsHorizontal
-        className="chat-header__settings-button"
-        onClick={(event: any) => menuRef.current.toggle(event)}
-      />
+      {
+        isNewChat
+          ? (
+              <IoCloseOutline
+                className="chat-header__close-button"
+                onClick={() => router.back()}
+              />
+            )
+          : (
+              <>
+                <Menu
+                  popup
+                  ref={menuRef}
+                  model={
+                    getHeaderSettingsMenuItems(
+                      translate,
+                      onLeaveChat,
+                    )
+                  }
+                  className="chat-header__settings-menu"
+                />
+          
+                <HiDotsHorizontal
+                  className="chat-header__settings-button"
+                  onClick={(event: any) => menuRef.current.toggle(event)}
+                />
+              </>
+            )
+      }
     </div>
   );
 }

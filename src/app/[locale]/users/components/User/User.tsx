@@ -1,29 +1,44 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
+
 import { usePathname, useRouter } from 'next/navigation';
 
 import './User.scss';
 
 import Avatar from '@/app/components/Avatar/Avatar';
-import { useTranslation } from 'react-i18next';
 
 interface UserProps {
   user: any;
+  conversations: any[];
 }
 
-export default function User({ user }: UserProps) {
+export default function User({ user, conversations }: UserProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const { i18n } = useTranslation();
 
-  const onUserClick = () => router.push(`/${i18n.language}/users/${user.id}`);
-
   const isUserSelected = () => {
     const splittedPathname = pathname.split('/');
 
     return +splittedPathname[splittedPathname.length - 1] === user.id;
-  }
+  };
+
+  const getAlreadyStartedConversation = () =>
+    conversations.find(conversation =>
+      conversation.participant_ids.includes(user.id)
+    );
+
+  const onUserClick = () => {
+    const alreadyStartedConversation = getAlreadyStartedConversation();
+
+    if (alreadyStartedConversation) {
+      router.push(`/${i18n.language}/conversations/${alreadyStartedConversation.id}`);
+    } else {
+      router.push(`/${i18n.language}/users/${user.id}`);
+    }
+  };
   
   return (
     <div

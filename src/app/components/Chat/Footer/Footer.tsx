@@ -8,31 +8,15 @@ import axios from 'axios';
 import './Footer.scss';
 
 interface FooterProps {
-  receiver: any;
+  onSendMessage: (data: any) => void;
 }
 
-export default function Footer({ receiver }: FooterProps) {
+export default function Footer({ onSendMessage }: FooterProps) {
   const { handleSubmit, register } = useForm();
-
-  const onFormSubmit = async (data: any) => {
-    const createdConversation = (await axios.post(
-      '/api/conversations',
-      { receiverId: receiver.id },
-    )).data;
-
-    await axios.post('/api/messages', {
-      conversationId: createdConversation.id,
-      receiverId: receiver.id,
-      message: data.message,
-    });
-  };
 
   return (
     <div className="chat-footer">
-      <form
-        className="chat-footer__form"
-        onSubmit={handleSubmit(onFormSubmit)}
-      >
+      <form className="chat-footer__form">
         <input
           placeholder='Write a message'
           {...register('message')}
@@ -41,7 +25,7 @@ export default function Footer({ receiver }: FooterProps) {
 
       <div
         className="chat-footer__send-button"
-        onClick={handleSubmit(onFormSubmit)}
+        onClick={handleSubmit(onSendMessage)}
       >
         <VscSend />
       </div>

@@ -4,12 +4,13 @@ import { MenuItem } from 'primereact/menuitem';
 
 export const getHeaderSettingsMenuItems = (
   translate: TFunction<'translation', undefined>,
-  onLeaveClick: () => void,
+  onLeaveChat: () => void,
 ): MenuItem[] => {
   return [
     {
       label: translate('chat.settings_menu.leave'),
-      command: onLeaveClick
+      className: 'chat-header__settings-menu-leave',
+      command: onLeaveChat,
     },
   ];
 };

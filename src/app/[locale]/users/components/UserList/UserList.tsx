@@ -7,9 +7,10 @@ import { useTranslation } from 'react-i18next';
 
 interface UserListProps {
   users: any[];
+  conversations: any[];
 }
 
-export default function UserList({ users }: UserListProps) {
+export default function UserList({ users, conversations }: UserListProps) {
   const { t: translate } = useTranslation();
 
   return (
@@ -23,6 +24,7 @@ export default function UserList({ users }: UserListProps) {
           <User
             key={user.id}
             user={user}
+            conversations={conversations}
           />
         ))}
       </div>

@@ -18,7 +18,10 @@ export default function Menu() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const onConversationsClick = () => router.push(`/${i18n.language}/conversations`);
+  const onConversationsClick = () => {
+    router.push(`/${i18n.language}/conversations`);
+    router.refresh();
+  };
   const onUsersClick = () => router.push(`/${i18n.language}/users`);
   const onSettingsClick = () => router.push(`/${i18n.language}/settings`);
 

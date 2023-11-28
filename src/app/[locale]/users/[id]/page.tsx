@@ -8,6 +8,7 @@ export default async function UserPage({ params: { id } }: any) {
     <div className="user-page w-[70%]">
       <Chat
         isOpen={true}
+        isNewChat={true}
         receiver={user}
       />
     </div>
