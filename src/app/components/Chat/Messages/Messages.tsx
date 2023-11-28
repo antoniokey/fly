@@ -5,12 +5,15 @@ import { useEffect, useState } from 'react';
 import './Messages.scss';
 
 import { useSocket } from '@/app/hooks/useSocket';
+import Message from './Message/Message';
 
 interface MessagesProps {
   messages: any[];
+  receiver: any;
+  sender: any;
 }
 
-export default function Messages({ messages }: MessagesProps) {
+export default function Messages({ messages, receiver, sender }: MessagesProps) {
   const [messagesData, setMessagesData] = useState(messages);
 
   const { socket } = useSocket();
@@ -34,7 +37,11 @@ export default function Messages({ messages }: MessagesProps) {
     <div className="chat-messages">
       {
         messagesData.map((message, index) => (
-          <div key={index}>{message.message}</div>
+          <Message
+            key={index}
+            message={message}
+            sender={sender}
+          />
         ))
       }
     </div>

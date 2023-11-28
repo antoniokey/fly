@@ -77,7 +77,11 @@ export default function Chat(
                   isNewChat={isNewChat}
                   onLeaveChat={onLeaveChat}
                 />
-                <Messages messages={conversation.messages || []} />
+                <Messages
+                  messages={conversation.messages || []}
+                  receiver={conversation.receiver}
+                  sender={session.data?.user}
+                />
                 <Footer onSendMessage={onSendMessage}/>
               </div>
             )

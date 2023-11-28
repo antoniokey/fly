@@ -1,0 +1,19 @@
+.chat-messages__message {
+  @apply flex gap-[15px] py-[5px] px-[10px] rounded-[15px] bg-primary w-fit;
+
+  &.sender {
+    @apply rounded-br-[0px] self-end;
+  }
+
+  &.receiver {
+    border-bottom-left-radius: 0px;
+  }
+
+  &__text {
+    color: white;
+  }
+
+  &__created-time {
+    @apply text-[12px] self-end text-gray-200;
+  }
+}

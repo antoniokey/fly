@@ -1,3 +1,5 @@
 .chat-messages {
+  @apply flex flex-col gap-[10px] px-[15px] py-[20px] overflow-scroll;
+
   height: calc(100% - 155px);
 }
