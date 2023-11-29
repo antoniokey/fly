@@ -1,13 +1,18 @@
 'use client';
 
 import { I18nextProvider } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import initTranslations from '@/app/i18n';
 
 let i18n: any;
 
-export default function TranslationsProvider({ children, locale }: any) {
+interface TranslationsProviderProps {
+  children: React.ReactNode;
+  locale: string;
+}
+
+export default function TranslationsProvider({ children, locale }: TranslationsProviderProps) {
   const [instance, setInstance] = useState(i18n);
 
   useEffect(() => {

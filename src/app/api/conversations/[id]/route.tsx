@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 import prisma from '@/app/lib/prisma';
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: Request): Promise<NextResponse> {
   const { url } = request;
 
   const splittedUrl = url.split('/');

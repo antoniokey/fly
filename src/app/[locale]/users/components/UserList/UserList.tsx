@@ -1,13 +1,17 @@
 'use client';
 
-import './UserList.scss';
-
-import User from '../User/User';
 import { useTranslation } from 'react-i18next';
 
+import './UserList.scss';
+
+import { User as IUser } from '@/app/interfaces/users.interfaces';
+import { Conversation } from '@/app/interfaces/conversations.interfaces';
+
+import User from '../User/User';
+
 interface UserListProps {
-  users: any[];
-  conversations: any[];
+  users: IUser[];
+  conversations: Conversation[];
 }
 
 export default function UserList({ users, conversations }: UserListProps) {

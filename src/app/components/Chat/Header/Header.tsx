@@ -12,11 +12,12 @@ import { Menu } from 'primereact/menu';
 import './Header.scss';
 
 import { getHeaderSettingsMenuItems } from '@/app/constants/chat.constants';
+import { User } from '@/app/interfaces/users.interfaces';
 
 import Avatar from '../../Avatar/Avatar';
 
 interface HeaderProps {
-  receiver: any;
+  receiver: User;
   isNewChat: boolean;
   onLeaveChat: () => void;
 }

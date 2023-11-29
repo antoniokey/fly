@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 import prisma from '@/app/lib/prisma';
 
-export async function POST(request: Request) {
+export async function POST(request: Request): Promise<NextResponse> {
   try {
     const body = await request.json();
 
@@ -31,10 +31,7 @@ export async function POST(request: Request) {
 
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    const {
-      password: createdUserPassword,
-      ...createdUserResponse
-    } = await prisma.users.create({
+    await prisma.users.create({
       data: {
         email,
         first_name,
@@ -45,7 +42,7 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json(createdUserResponse);
+    return new NextResponse();
   } catch(error: any) {
     return new NextResponse(error, { status: 500 });
   }

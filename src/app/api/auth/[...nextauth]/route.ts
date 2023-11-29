@@ -1,11 +1,13 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
-
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
 import bcrypt from 'bcrypt';
 
+import { PrismaAdapter } from '@auth/prisma-adapter';
+
 import prisma from '@/app/lib/prisma';
+import { User } from '@/app/interfaces/users.interfaces';
+import { excludeFields } from '@/app/helpers/prisma.heplers';
 
 export const nextAuthOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -26,7 +28,7 @@ export const nextAuthOptions: NextAuthOptions = {
           throw new Error('Missed some required data');
         }
 
-        const user = await prisma.users.findUnique({
+        const user: User | null = await prisma.users.findUnique({
           where: { email: credentials.email },
         });
 
@@ -40,9 +42,7 @@ export const nextAuthOptions: NextAuthOptions = {
           throw new Error('User not found');
         }
 
-        const { password, ...userResponse } = user;
-
-        return userResponse;
+        return excludeFields<User>(user, ['password']);
       },
     }),
   ],

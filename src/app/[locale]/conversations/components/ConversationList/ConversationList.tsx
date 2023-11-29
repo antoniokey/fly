@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next';
 import './ConversationList.scss';
 
 import Conversation from '../Conversation/Conversation';
+import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
 
 interface ConversationListProps {
-  conversations: any[];
+  conversations: IConversation[];
 }
 
 export default function ConversationList({ conversations }: ConversationListProps) {
@@ -24,7 +25,6 @@ export default function ConversationList({ conversations }: ConversationListProp
           <Conversation
             key={conversation.id}
             conversation={conversation}
-            receiver={null}
           />
         ))}
       </div>

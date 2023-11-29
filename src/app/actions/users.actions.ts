@@ -2,11 +2,13 @@ import { getServerSession } from 'next-auth';
 
 import prisma from '../lib/prisma';
 import { nextAuthOptions } from '../api/auth/[...nextauth]/route';
+import { excludeFields } from '../helpers/prisma.heplers';
+import { User } from '../interfaces/users.interfaces';
 
-export const getUsers = async () => {
+export const getUsers = async (): Promise<User[]> => {
   const session = await getServerSession(nextAuthOptions);
 
-  const users = await prisma.users.findMany({
+  const users: User[] = await prisma.users.findMany({
     where: {
       id: {
         not: session?.user.id,
@@ -14,13 +16,13 @@ export const getUsers = async () => {
     },
   });
 
-  return users;
+  return excludeFields<User[]>(users, ['password']);
 };
 
-export const getUser = async (id: number) => {
-  const user = await prisma.users.findFirst({
+export const getUser = async (id: number): Promise<User> => {
+  const user: User | null = await prisma.users.findFirst({
     where: { id },
   });
 
-  return user;
+  return excludeFields<User | null>(user, ['password']);
 };

@@ -1,17 +1,19 @@
 import { getUser } from '@/app/actions/users.actions';
 import Chat from '@/app/components/Chat/Chat';
+import { PageParamsProps } from '@/app/interfaces/common.interfaces';
+import { Conversation } from '@/app/interfaces/conversations.interfaces';
 
-export default async function UserPage({ params: { id } }: any) {
+export default async function UserPage({ params: { id } }: PageParamsProps) {
   const user = await getUser(+id);
 
-  const conversation = { receiver: user };
+  const conversation: Pick<Conversation, 'receiver'> = { receiver: user };
 
   return (
     <div className="user-page w-[70%]">
       <Chat
         isOpen={true}
         isNewChat={true}
-        conversation={conversation}
+        conversation={conversation as Conversation}
       />
     </div>
   );

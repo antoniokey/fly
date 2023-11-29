@@ -4,8 +4,10 @@ import Image from 'next/image';
 
 import './Avatar.scss';
 
+import { User } from '@/app/interfaces/users.interfaces';
+
 interface AvatarProps {
-  user: any;
+  user: User;
   status: string;
 }
 
@@ -13,7 +15,11 @@ export default function Avatar({ user, status }: AvatarProps) {
   return (
     <div
       className="avatar"
-      style={user.image_color && { background: user.image_color }}
+      style={
+        user.image_color
+          ? { background: user.image_color }
+          : {}
+      }
     >
       <div className={`avatar__status ${status}`}></div>
 

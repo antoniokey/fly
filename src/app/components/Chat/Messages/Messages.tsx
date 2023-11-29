@@ -5,15 +5,17 @@ import { useEffect, useState } from 'react';
 import './Messages.scss';
 
 import { useSocket } from '@/app/hooks/useSocket';
+import { User } from '@/app/interfaces/users.interfaces';
+import { Message as IMessage } from '@/app/interfaces/messages.interfaces';
+
 import Message from './Message/Message';
 
 interface MessagesProps {
-  messages: any[];
-  receiver: any;
-  sender: any;
+  messages: IMessage[];
+  sender: User;
 }
 
-export default function Messages({ messages, receiver, sender }: MessagesProps) {
+export default function Messages({ messages, sender }: MessagesProps) {
   const [messagesData, setMessagesData] = useState(messages);
 
   const { socket } = useSocket();

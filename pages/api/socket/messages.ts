@@ -2,7 +2,10 @@ import prisma from '@/app/lib/prisma';
 
 import { NextApiResponseSocketServer } from '../../../types';
 
-export default async function handler(request: Request, response: NextApiResponseSocketServer) {
+export default async function handler(
+  request: Request,
+  response: NextApiResponseSocketServer,
+): Promise<NextApiResponseSocketServer> {
   if (request.method === 'POST') {
     const {
       conversationId,

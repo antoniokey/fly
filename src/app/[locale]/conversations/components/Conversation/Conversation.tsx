@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
 import './Conversation.scss';
 
 import Avatar from '@/app/components/Avatar/Avatar';
+import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
 
 interface Conversation {
-  conversation: any;
-  receiver: any;
+  conversation: IConversation;
 }
 
 export default function Conversation({ conversation }: Conversation) {

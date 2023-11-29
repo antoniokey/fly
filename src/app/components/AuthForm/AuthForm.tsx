@@ -15,17 +15,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import './AuthForm.scss';
 
 import { getAuthFormValidationSchema } from '@/app/constants/validation/auth-form.validation';
+import { AuthFormModel } from '@/app/interfaces/auth.interfaces';
 
 interface AuthFormProps {
   authType: string;
   setAuthType: (authType: string) => void;
-}
-
-interface AuthFormModel {
-  email: string;
-  first_name?: string | unknown;
-  last_name?: string | unknown;
-  password: string;
 }
 
 export default function AuthForm({ authType, setAuthType }: AuthFormProps) {

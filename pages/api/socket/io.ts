@@ -10,7 +10,10 @@ export const config = {
   },
 };
 
-const ioHandler = (requset: NextApiRequest, response: NextApiResponseSocketServer) => {
+const ioHandler = (
+  requset: NextApiRequest,
+  response: NextApiResponseSocketServer,
+): NextApiResponseSocketServer => {
   if (!response.socket.server.io) {
     const path = '/api/socket/io';
     const httpServer: HttpServer = response.socket.server as any;

@@ -7,10 +7,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import './User.scss';
 
 import Avatar from '@/app/components/Avatar/Avatar';
+import { User } from '@/app/interfaces/users.interfaces';
+import { Conversation } from '@/app/interfaces/conversations.interfaces';
 
 interface UserProps {
-  user: any;
-  conversations: any[];
+  user: User;
+  conversations: Conversation[];
 }
 
 export default function User({ user, conversations }: UserProps) {

@@ -5,20 +5,24 @@ import { useTranslation } from 'react-i18next';
 import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 
-import { FieldValues, UseFormReset } from 'react-hook-form';
+import { UseFormReset } from 'react-hook-form';
 
 import axios from 'axios';
 
 import './Chat.scss';
 
+import { Conversation } from '@/app/interfaces/conversations.interfaces';
+import { User } from '@/app/interfaces/users.interfaces';
+import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
+
 import Messages from './Messages/Messages';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 
-interface Chat {
+interface ChatProps {
   isOpen: boolean;
   isNewChat?: boolean;
-  conversation?: any;
+  conversation?: Conversation;
 }
 
 export default function Chat(
@@ -26,7 +30,7 @@ export default function Chat(
     isOpen,
     isNewChat = false,
     conversation,
-  }: Chat,
+  }: ChatProps,
 ) {
   const session = useSession();
   const router = useRouter();
@@ -34,16 +38,16 @@ export default function Chat(
 
   const { t: translate } = useTranslation();
 
-  const onSendMessage = (resetMessageField: UseFormReset<FieldValues>) =>
-    async (data: any) => {
+  const onSendMessage = (resetMessageField: UseFormReset<MessageFieldFormValues>) =>
+    async (data: MessageFieldFormValues) => {
       let conversationId;
 
-      if (conversation.id) {
+      if (conversation?.id) {
         conversationId = conversation.id;
       } else {
         const createdConversation = (await axios.post(
           '/api/conversations',
-          { receiverId: conversation.receiver.id },
+          { receiverId: conversation?.receiver?.id },
         )).data;
 
         conversationId = createdConversation.id;
@@ -52,7 +56,7 @@ export default function Chat(
       await axios.post('/api/socket/messages', {
         session,
         conversationId,
-        receiverId: conversation.receiver.id,
+        receiverId: conversation?.receiver?.id,
         message: data.message,
       });
 
@@ -73,13 +77,12 @@ export default function Chat(
           ? (
               <div className="chat__body">
                 <Header
-                  receiver={conversation.receiver}
+                  receiver={conversation?.receiver as User}
                   isNewChat={isNewChat}
                   onLeaveChat={onLeaveChat}
                 />
                 <Messages
-                  messages={conversation.messages || []}
-                  receiver={conversation.receiver}
+                  messages={conversation?.messages || []}
                   sender={session.data?.user}
                 />
                 <Footer onSendMessage={onSendMessage}/>

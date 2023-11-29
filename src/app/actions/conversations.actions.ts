@@ -2,11 +2,14 @@ import { getServerSession } from 'next-auth';
 
 import { nextAuthOptions } from '../api/auth/[...nextauth]/route';
 import prisma from '../lib/prisma';
+import { Conversation, ConversationResponse } from '../interfaces/conversations.interfaces';
+import { User } from '../interfaces/users.interfaces';
+import { excludeFields } from '../helpers/prisma.heplers';
 
-export const getConversations = async () => {
+export const getConversations = async (): Promise<Conversation[]> => {
   const session = await getServerSession(nextAuthOptions);
 
-  const conversations = await prisma.conversations.findMany({
+  const conversations: ConversationResponse[] = await prisma.conversations.findMany({
     where: {
       participant_ids: {
         has: session?.user?.id,
@@ -22,7 +25,7 @@ export const getConversations = async () => {
     return receiverId;
   });
   
-  const receivers = await prisma.users.findMany({
+  const receivers: User[] = await prisma.users.findMany({
     where: {
       id: {
         in: conversationsReceiverIds,
@@ -32,14 +35,14 @@ export const getConversations = async () => {
 
   return conversations.map((conversation, index) => ({
     ...conversation,
-    receiver: receivers[index],
-  }));
+    receiver: excludeFields<User>(receivers[index], ['password']),
+  })) as Conversation[];
 }
 
-export const getConversation = async (id: number) => {
+export const getConversation = async (id: number): Promise<Conversation> => {
   const session = await getServerSession(nextAuthOptions);
 
-  const conversation = await prisma.conversations.findFirst({
+  const conversation: ConversationResponse | null = await prisma.conversations.findFirst({
     where: { id },
     include: {
       messages: true,
@@ -50,7 +53,7 @@ export const getConversation = async (id: number) => {
     participant_id !== session?.user?.id,
   )[0];
 
-  const receiver = await prisma.users.findFirst({
+  const receiver: User | null = await prisma.users.findFirst({
     where: {
       id: conversationsReceiverId,
     },
@@ -58,6 +61,6 @@ export const getConversation = async (id: number) => {
 
   return {
     ...conversation,
-    receiver,
-  };
+    receiver: excludeFields<User | null>(receiver, ['password']),
+  } as Conversation;
 };

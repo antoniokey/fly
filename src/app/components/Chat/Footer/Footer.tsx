@@ -1,16 +1,19 @@
 'use client';
 
-import { FieldValues, UseFormReset, useForm } from 'react-hook-form';
+import { UseFormReset, useForm } from 'react-hook-form';
 import { VscSend } from 'react-icons/vsc';
 
 import './Footer.scss';
 
+import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
+
 interface FooterProps {
-  onSendMessage: (resetMessageField: UseFormReset<FieldValues>) => (data: any) => void;
+  onSendMessage: (resetMessageField: UseFormReset<MessageFieldFormValues>) =>
+    (data: MessageFieldFormValues) => void;
 }
 
 export default function Footer({ onSendMessage }: FooterProps) {
-  const { handleSubmit, register, reset } = useForm();
+  const { handleSubmit, register, reset } = useForm<MessageFieldFormValues>();
 
   return (
     <div className="chat-footer">
