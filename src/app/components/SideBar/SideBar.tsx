@@ -1,10 +1,10 @@
-import React from 'react';
-
 import './SideBar.scss';
+
+import { PageProps } from '@/app/interfaces/common.interfaces';
 
 import Menu from './Menu/Menu';
 
-export default function SideBar({ children }: { children: React.ReactNode }) {
+export default function SideBar({ children }: PageProps) {
   return (
     <div className="side-bar">
       <Menu />

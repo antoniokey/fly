@@ -13,6 +13,7 @@ import './Header.scss';
 
 import { getHeaderSettingsMenuItems } from '@/app/constants/chat.constants';
 import { User } from '@/app/interfaces/users.interfaces';
+import { UserStatus } from '@/app/enum/users.enum';
 
 import Avatar from '../../Avatar/Avatar';
 
@@ -33,7 +34,7 @@ export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps
     <div className="chat-header">
       <div className="chat-header__user">
         <Avatar
-          status='online'
+          status={UserStatus.Online}
           user={receiver}
         />
 
@@ -44,7 +45,7 @@ export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps
           </div>
 
           <div className="chat-header__status">
-            Online
+            {translate(`users.status.${UserStatus.Online}`)}
           </div>
         </div>
       </div>

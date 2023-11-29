@@ -16,10 +16,11 @@ import './AuthForm.scss';
 
 import { getAuthFormValidationSchema } from '@/app/constants/validation/auth-form.validation';
 import { AuthFormModel } from '@/app/interfaces/auth.interfaces';
+import { AuthType } from '@/app/enum/auth.enum';
 
 interface AuthFormProps {
-  authType: string;
-  setAuthType: (authType: string) => void;
+  authType: AuthType;
+  setAuthType: (authType: AuthType) => void;
 }
 
 export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
@@ -35,7 +36,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
   });
 
   const onFormSubmit = async (data: AuthFormModel) => {
-    if (authType === 'login') {
+    if (authType === AuthType.Login) {
       try {
         await signIn(
           'credentials',
@@ -60,7 +61,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
 
         toast.success(translate('auth.account_was_successfully_created'));
 
-        setAuthType('login');
+        setAuthType(AuthType.Login);
       } catch(error: any) {
         toast.error(error.response?.data || error.message || translate('errors.something_goes_wrong'));
       }
@@ -71,9 +72,9 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
 
   const onSwitchAuthTypeClick = () =>
     setAuthType(
-      authType === 'login'
-        ? 'register'
-        : 'login'
+      authType === AuthType.Login
+        ? AuthType.Register
+        : AuthType.Login
     )
 
   return (
@@ -98,7 +99,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
             }
           </div>
           {
-            authType === 'register'
+            authType === AuthType.Register
               ? (
                   <>
                     <div className="auth-form__field">
@@ -161,7 +162,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
           type="submit"
         >
           {
-            authType === 'login'
+            authType === AuthType.Login
               ? translate('auth.actions.login')
               : translate('auth.actions.register')
           }
@@ -171,7 +172,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
       <div className='auth-form__form-type-switcher'>
         <span className="auth-form__switcher-label">
           {
-            authType === 'login'
+            authType === AuthType.Login
               ? translate('auth.do_not_have_an_account')
               : translate('auth.already_have_an_account')
           }
@@ -182,7 +183,7 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
           onClick={onSwitchAuthTypeClick}
         >
           {
-            authType === 'login'
+            authType === AuthType.Login
               ? translate('auth.actions.create_an_account')
               : translate('auth.actions.login')
           }

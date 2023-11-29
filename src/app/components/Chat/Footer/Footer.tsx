@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslation } from 'react-i18next';
 import { UseFormReset, useForm } from 'react-hook-form';
 import { VscSend } from 'react-icons/vsc';
 
@@ -15,6 +16,8 @@ interface FooterProps {
 export default function Footer({ onSendMessage }: FooterProps) {
   const { handleSubmit, register, reset } = useForm<MessageFieldFormValues>();
 
+  const { t: translate } = useTranslation();
+
   return (
     <div className="chat-footer">
       <form
@@ -22,7 +25,7 @@ export default function Footer({ onSendMessage }: FooterProps) {
         onSubmit={handleSubmit(onSendMessage(reset))}
       >
         <input
-          placeholder='Write a message'
+          placeholder={translate('chat.message_field_placeholder')}
           {...register('message')}
         />
       </form>

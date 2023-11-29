@@ -29,6 +29,7 @@
   },
   "chat": {
     "empty": "Seleccione un chat o inicie una nueva conversación",
+    "message_field_placeholder": "Escribe un mensaje",
     "settings_menu": {
       "leave": "Dejar"
     }
@@ -37,6 +38,9 @@
     "conversations_list_title": "Conversaciones"
   },
   "users": {
-    "users_list_title": "Gente"
+    "users_list_title": "Gente",
+    "status": {
+      "online": "En línea"
+    }
   }
 }

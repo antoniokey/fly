@@ -1,5 +1,5 @@
-import React from 'react';
+import { PageProps } from './interfaces/common.interfaces';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: PageProps) {
   return children;
 }

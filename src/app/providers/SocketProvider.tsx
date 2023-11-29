@@ -1,8 +1,10 @@
 'use client';
 
-import React, { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { io as ClientIO, Socket } from 'socket.io-client';
+
+import { PageProps } from '../interfaces/common.interfaces';
 
 interface SocketContextType {
   socket: Socket | null;
@@ -14,7 +16,7 @@ export const SocketContext = createContext<SocketContextType>({
   isConnected: false,
 });
 
-export default function SocketProvider({ children }: { children: React.ReactNode }) {
+export default function SocketProvider({ children }: PageProps) {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
 

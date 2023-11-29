@@ -1,9 +1,9 @@
 import { getUser } from '@/app/actions/users.actions';
 import Chat from '@/app/components/Chat/Chat';
-import { PageParamsProps } from '@/app/interfaces/common.interfaces';
+import { PageProps } from '@/app/interfaces/common.interfaces';
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
 
-export default async function UserPage({ params: { id } }: PageParamsProps) {
+export default async function UserPage({ params: { id } }: PageProps) {
   const user = await getUser(+id);
 
   const conversation: Pick<Conversation, 'receiver'> = { receiver: user };

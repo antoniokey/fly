@@ -12,9 +12,10 @@ import './HomePage.scss';
 import Logo from '../../../public/logos/logo.png';
 
 import AuthForm from '../components/AuthForm/AuthForm';
+import { AuthType, SessionStatus } from '../enum/auth.enum';
 
 export default function HomePage() {
-  const [authType, setAuthType] = useState('login');
+  const [authType, setAuthType] = useState(AuthType.Login);
 
   const { t: translate, i18n } = useTranslation();
 
@@ -22,7 +23,7 @@ export default function HomePage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (session.status === 'authenticated') {
+    if (session.status === SessionStatus.Authenticated) {
       router.push(`/${i18n.language}/conversations`);
     }
   }, [session.status, router]);

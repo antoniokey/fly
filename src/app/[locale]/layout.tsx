@@ -14,16 +14,16 @@ import Logo from '../../../public/logos/logo.png';
 import TranslationsProvider from '../providers/TranslationsProvider';
 import AuthProvider from '../providers/AuthProvider';
 import SocketProvider from '../providers/SocketProvider';
+import { PageProps } from '../interfaces/common.interfaces';
 
 export const metadata: Metadata = { title: 'Fly' };
 
-export default function RootLayout({
-  children,
-  params: { locale },
-}: {
-  children: React.ReactNode,
-  params: { locale: string },
-}) {
+export default function RootLayout(
+  {
+    children,
+    params: { locale },
+  }: PageProps,
+) {
   return (
     <html lang={locale}>
       <head>
@@ -49,5 +49,5 @@ export default function RootLayout({
         </AuthProvider>
       </body>
     </html>
-  )
+  );
 }
