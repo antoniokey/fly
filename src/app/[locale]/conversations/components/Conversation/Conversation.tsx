@@ -8,12 +8,14 @@ import './Conversation.scss';
 
 import Avatar from '@/app/components/Avatar/Avatar';
 import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
+import { useStatus } from '@/app/hooks/useStatus';
 
 interface Conversation {
   conversation: IConversation;
 }
 
 export default function Conversation({ conversation }: Conversation) {
+  const status = useStatus(conversation.receiver.id);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -32,7 +34,10 @@ export default function Conversation({ conversation }: Conversation) {
       className={`conversation ${isConversationSelected() && 'selected'}`}
       onClick={onConversationClick}
     >
-      <Avatar user={conversation.receiver} status='online' />
+      <Avatar
+        user={conversation.receiver}
+        status={status}
+      />
 
       <div className="conversation__info">
         <span className="conversation__first-name">

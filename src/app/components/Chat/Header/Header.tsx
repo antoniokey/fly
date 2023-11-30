@@ -13,7 +13,8 @@ import './Header.scss';
 
 import { getHeaderSettingsMenuItems } from '@/app/constants/chat.constants';
 import { User } from '@/app/interfaces/users.interfaces';
-import { UserStatus } from '@/app/enum/users.enum';
+import { Status } from '@/app/enum/users.enum';
+import { useStatus } from '@/app/hooks/useStatus';
 
 import Avatar from '../../Avatar/Avatar';
 
@@ -24,6 +25,7 @@ interface HeaderProps {
 }
 
 export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps) {
+  const status = useStatus(receiver.id);
   const router = useRouter();
 
   const menuRef: any = useRef();
@@ -34,7 +36,7 @@ export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps
     <div className="chat-header">
       <div className="chat-header__user">
         <Avatar
-          status={UserStatus.Online}
+          status={status}
           user={receiver}
         />
 
@@ -44,9 +46,13 @@ export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps
             <span>{receiver.last_name}</span>
           </div>
 
-          <div className="chat-header__status">
-            {translate(`users.status.${UserStatus.Online}`)}
-          </div>
+          {
+            status === Status.Online && (
+              <div className="chat-header__status">
+                {translate(`users.status.${Status.Online}`)}
+              </div>
+            )
+          }
         </div>
       </div>
 

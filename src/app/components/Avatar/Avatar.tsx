@@ -5,11 +5,11 @@ import Image from 'next/image';
 import './Avatar.scss';
 
 import { User } from '@/app/interfaces/users.interfaces';
-import { UserStatus } from '@/app/enum/users.enum';
+import { Status } from '@/app/enum/users.enum';
 
 interface AvatarProps {
   user: User;
-  status: UserStatus;
+  status: Status;
 }
 
 export default function Avatar({ user, status }: AvatarProps) {

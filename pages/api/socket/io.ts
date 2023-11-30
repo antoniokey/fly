@@ -1,6 +1,11 @@
 import { Server as HttpServer } from 'http';
+
 import { Server as SocketServer } from 'socket.io';
+
 import { NextApiRequest } from 'next';
+
+import { isUserOnline } from '@/app/helpers/socket.helpers';
+import { OnlineUser } from '@/app/interfaces/users.interfaces';
 
 import { NextApiResponseSocketServer } from '../../../types';
 
@@ -25,7 +30,27 @@ const ioHandler = (
       },
     );
 
+    let onlineUsers: OnlineUser[] = [];
+
     response.socket.server.io = socketServer;
+
+    socketServer.on('connection', socket => {
+      socket.on('user-online', id => {
+        if (!isUserOnline(onlineUsers, id)) {
+          onlineUsers.push({ id, socketId: socket.id });
+
+          socketServer.emit('online-users', onlineUsers);
+        }
+      });
+
+      socket.on('disconnect', () => {
+        onlineUsers = onlineUsers.filter(onlineUser =>
+          onlineUser.socketId !== socket.id,
+        );
+
+        socketServer.emit('online-users', onlineUsers);
+      });
+    });
   }
 
   return response.end();

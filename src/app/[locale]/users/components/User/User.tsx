@@ -9,6 +9,8 @@ import './User.scss';
 import Avatar from '@/app/components/Avatar/Avatar';
 import { User } from '@/app/interfaces/users.interfaces';
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
+import { Status } from '@/app/enum/users.enum';
+import { useStatus } from '@/app/hooks/useStatus';
 
 interface UserProps {
   user: User;
@@ -16,6 +18,7 @@ interface UserProps {
 }
 
 export default function User({ user, conversations }: UserProps) {
+  const status = useStatus(user.id);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -47,7 +50,10 @@ export default function User({ user, conversations }: UserProps) {
       className={`user ${isUserSelected() && 'selected'}`}
       onClick={onUserClick}
     >
-      <Avatar user={user} status='online' />
+      <Avatar
+        user={user}
+        status={status}
+      />
 
       <div className="user__info">
         <span className="user__first-name">
