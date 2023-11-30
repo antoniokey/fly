@@ -1,5 +1,5 @@
 .menu {
-  @apply flex flex-col content-between p-[25px] border-r-gray-300 border-r-[1px];
+  @apply flex flex-col justify-between items-center p-[25px] border-r-gray-300 border-r-[1px];
 
   &__navigation-items {
     @apply flex flex-col gap-[25px];

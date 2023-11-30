@@ -1,5 +1,9 @@
 .home-page {
-  height: 100vh;
+  @apply h-[100vh] relative;
+
+  &__language-selection {
+    @apply flex justify-end absolute w-full top-[10px] right-[10px];
+  }
 
   &__auth {
     @apply flex flex-col items-center relative top-[50%] translate-y-[-50%] gap-[20px];

@@ -1,0 +1,13 @@
+.language-selection {
+  &__toggle {
+    @apply bg-transparent border-0 p-0;
+
+    background: unset !important;
+    border: unset !important;
+
+    img {
+      width: 35px !important;
+      height: 35px !important;
+    }
+  }
+}

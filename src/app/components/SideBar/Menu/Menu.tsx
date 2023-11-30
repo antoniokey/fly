@@ -12,6 +12,8 @@ import { signOut } from 'next-auth/react';
 
 import './Menu.scss';
 
+import LanguageSelection from '../../LanguageSelection/LanguageSelection';
+
 export default function Menu() {
   const { i18n } = useTranslation();
 
@@ -48,6 +50,10 @@ export default function Menu() {
           onClick={onSettingsClick}
         />
         <IoIosLogOut onClick={onLogoutClick} />
+      </div>
+
+      <div className="menu__country-flags">
+        <LanguageSelection />
       </div>
     </div>
   );

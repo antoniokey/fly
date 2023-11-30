@@ -13,6 +13,7 @@ import Logo from '../../../public/logos/logo.png';
 
 import AuthForm from '../components/AuthForm/AuthForm';
 import { AuthType, SessionStatus } from '../enum/auth.enum';
+import LanguageSelection from '../components/LanguageSelection/LanguageSelection';
 
 export default function HomePage() {
   const [authType, setAuthType] = useState(AuthType.Login);
@@ -30,6 +31,10 @@ export default function HomePage() {
   
   return (
     <div className='home-page'>
+      <div className='home-page__language-selection'>
+        <LanguageSelection />
+      </div>
+
       <div className='home-page__auth'>
         <Image
           alt="logo"
