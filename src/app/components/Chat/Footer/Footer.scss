@@ -2,7 +2,7 @@
   @apply flex items-center h-[75px] gap-[15px] border-t-gray-300 border-t-[1px] px-[10px];
 
   &__form {
-    @apply w-full;
+    @apply w-full relative flex items-center;
 
     input {
       @apply
@@ -16,6 +16,25 @@
         w-full
         bg-gray-50;
     }
+
+    .EmojiPickerReact {
+      @apply bottom-[40px] right-0;
+
+      position: absolute !important;
+
+      .epr-skin-tones,
+      .epr-preview {
+        display: none;
+      }
+    }
+  }
+
+  &__emoji-button {
+    @apply absolute right-[15px] cursor-pointer;
+  }
+
+  &__emoji-label {
+    @apply text-[22px];
   }
 
   &__send-button {

@@ -1,8 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
 import { useTranslation } from 'react-i18next';
 import { UseFormReset, useForm } from 'react-hook-form';
 import { VscSend } from 'react-icons/vsc';
+
+import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 
 import './Footer.scss';
 
@@ -14,9 +18,20 @@ interface FooterProps {
 }
 
 export default function Footer({ onSendMessage }: FooterProps) {
-  const { handleSubmit, register, reset } = useForm<MessageFieldFormValues>();
+  const [isEmojiOpened, setIsEmojiOpened] = useState(false);
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    setValue,
+    getValues,
+  } = useForm<MessageFieldFormValues>();
 
   const { t: translate } = useTranslation();
+
+  const onEmojiClick = (emojiData: EmojiClickData) =>
+    setValue('message', `${getValues().message} ${emojiData.emoji}`);
 
   return (
     <div className="chat-footer">
@@ -28,6 +43,15 @@ export default function Footer({ onSendMessage }: FooterProps) {
           placeholder={translate('chat.message_field_placeholder')}
           {...register('message')}
         />
+
+        <div
+          className="chat-footer__emoji-button"
+          onClick={() => setIsEmojiOpened(!isEmojiOpened)}
+        >
+          <span className="chat-footer__emoji-label">🙂</span>
+        </div>
+
+        {isEmojiOpened && <EmojiPicker onEmojiClick={onEmojiClick} />}
       </form>
 
       <div
