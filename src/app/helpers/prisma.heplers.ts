@@ -17,7 +17,7 @@ export const excludeFields = <T>(
   }
 };
 
-const getItemWithRemovedField = <T>(item: T, fields: string[]) =>
+const getItemWithRemovedField = <T>(item: T, fields: string[]): any =>
   Object.fromEntries(
     Object.entries(item as any)
       .filter(([key]) => !fields.includes(key)),

@@ -32,7 +32,7 @@ export default function LanguageSelection() {
 
   const [label, setLabel] = useState(getLanguageSelectionOptionLabel(options, params?.locale as string));
 
-  const onLanguageSelect = (selectedOption: LanguageSelectionOption) => {
+  const onLanguageSelect = (selectedOption: LanguageSelectionOption): void => {
     setLabel(selectedOption.label);
 
     router.replace(`/${selectedOption.value}/${pathname?.slice(4)}`);

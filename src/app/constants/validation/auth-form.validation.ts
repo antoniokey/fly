@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 export const getAuthFormValidationSchema = (
   authType: string,
   translate: TFunction<'translation', undefined>,
-) =>
+): Yup.ObjectSchema<any> =>
   Yup.object({
     email: Yup
       .string()

@@ -9,6 +9,7 @@ import './Conversation.scss';
 import Avatar from '@/app/components/Avatar/Avatar';
 import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
 import { useStatus } from '@/app/hooks/useStatus';
+import { isItemSelected } from '@/app/helpers/common.helpers';
 
 interface Conversation {
   conversation: IConversation;
@@ -21,17 +22,12 @@ export default function Conversation({ conversation }: Conversation) {
 
   const { i18n } = useTranslation();
 
-  const onConversationClick = () => router.push(`/${i18n.language}/conversations/${conversation.id}`);
-
-  const isConversationSelected = () => {
-    const splittedPathname = pathname.split('/');
-
-    return +splittedPathname[splittedPathname.length - 1] === conversation.id;
-  }
+  const onConversationClick = (): void =>
+    router.push(`/${i18n.language}/conversations/${conversation.id}`);
 
   return (
     <div
-      className={`conversation ${isConversationSelected() && 'selected'}`}
+      className={`conversation ${isItemSelected(pathname || '', conversation.id) && 'selected'}`}
       onClick={onConversationClick}
     >
       <Avatar

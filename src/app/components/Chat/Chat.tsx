@@ -38,32 +38,33 @@ export default function Chat(
 
   const { t: translate } = useTranslation();
 
-  const onSendMessage = (resetMessageField: UseFormReset<MessageFieldFormValues>) =>
-    async (data: MessageFieldFormValues) => {
-      let conversationId;
+  const onSendMessage =
+    (resetMessageField: UseFormReset<MessageFieldFormValues>): (data: MessageFieldFormValues) => Promise<void> =>
+      async (data: MessageFieldFormValues): Promise<void> => {
+        let conversationId;
 
-      if (conversation?.id) {
-        conversationId = conversation.id;
-      } else {
-        const createdConversation = (await axios.post(
-          '/api/conversations',
-          { receiverId: conversation?.receiver?.id },
-        )).data;
+        if (conversation?.id) {
+          conversationId = conversation.id;
+        } else {
+          const createdConversation = (await axios.post(
+            '/api/conversations',
+            { receiverId: conversation?.receiver?.id },
+          )).data;
 
-        conversationId = createdConversation.id;
-      }
+          conversationId = createdConversation.id;
+        }
 
-      await axios.post('/api/socket/messages', {
-        session,
-        conversationId,
-        receiverId: conversation?.receiver?.id,
-        message: data.message,
-      });
+        await axios.post('/api/socket/messages', {
+          session,
+          conversationId,
+          receiverId: conversation?.receiver?.id,
+          message: data.message,
+        });
 
-      resetMessageField();
-    };
+        resetMessageField();
+      };
 
-  const onLeaveChat = async () => {
+  const onLeaveChat = async (): Promise<void> => {
     await axios.delete(`/api/conversations/${params?.id}`);
 
     router.back();

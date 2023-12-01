@@ -9,8 +9,8 @@ import './User.scss';
 import Avatar from '@/app/components/Avatar/Avatar';
 import { User } from '@/app/interfaces/users.interfaces';
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
-import { Status } from '@/app/enum/users.enum';
 import { useStatus } from '@/app/hooks/useStatus';
+import { isItemSelected } from '@/app/helpers/common.helpers';
 
 interface UserProps {
   user: User;
@@ -24,18 +24,12 @@ export default function User({ user, conversations }: UserProps) {
 
   const { i18n } = useTranslation();
 
-  const isUserSelected = () => {
-    const splittedPathname = pathname.split('/');
-
-    return +splittedPathname[splittedPathname.length - 1] === user.id;
-  };
-
-  const getAlreadyStartedConversation = () =>
+  const getAlreadyStartedConversation = (): Conversation | undefined =>
     conversations.find(conversation =>
       conversation.participant_ids.includes(user.id)
     );
 
-  const onUserClick = () => {
+  const onUserClick = (): void => {
     const alreadyStartedConversation = getAlreadyStartedConversation();
 
     if (alreadyStartedConversation) {
@@ -47,7 +41,7 @@ export default function User({ user, conversations }: UserProps) {
   
   return (
     <div
-      className={`user ${isUserSelected() && 'selected'}`}
+      className={`user ${isItemSelected(pathname || '', user.id) && 'selected'}`}
       onClick={onUserClick}
     >
       <Avatar

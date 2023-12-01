@@ -22,7 +22,7 @@ export default function RootLayout(
   {
     children,
     params: { locale },
-  }: PageProps,
+  }: Required<PageProps>,
 ) {
   return (
     <html lang={locale}>

@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react';
 
 import { PageProps } from '../interfaces/common.interfaces';
 
-interface SocketContextType {
+export interface SocketContextType {
   socket: Socket | null;
   isConnected: boolean;
 }

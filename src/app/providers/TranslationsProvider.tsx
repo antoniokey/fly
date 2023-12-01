@@ -16,7 +16,7 @@ export default function TranslationsProvider({ children, locale }: TranslationsP
   const [instance, setInstance] = useState(i18n);
 
   useEffect(() => {
-    const init = async () => {
+    const init = async (): Promise<void> => {
       if (!i18n) {
         const newInstance = await initTranslations(locale);
         i18n = newInstance;

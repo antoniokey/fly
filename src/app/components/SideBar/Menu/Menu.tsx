@@ -20,17 +20,22 @@ export default function Menu() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const onConversationsClick = () => {
+  const onConversationsClick = (): void => {
     router.push(`/${i18n.language}/conversations`);
     router.refresh();
   };
-  const onUsersClick = () => router.push(`/${i18n.language}/users`);
-  const onSettingsClick = () => router.push(`/${i18n.language}/settings`);
 
-  const onLogoutClick = () => signOut({ callbackUrl: `/${i18n.language}` });
+  const onUsersClick = (): void => 
+    router.push(`/${i18n.language}/users`);
 
-  const getMenuItemClassName = (menuItemKey: string) =>
-    pathname.includes(menuItemKey)
+  const onSettingsClick = (): void =>
+    router.push(`/${i18n.language}/settings`);
+
+  const onLogoutClick = (): Promise<void> =>
+    signOut({ callbackUrl: `/${i18n.language}` });
+
+  const getMenuItemClassName = (menuItemKey: string): string =>
+    (pathname || '').includes(menuItemKey)
       ? 'selected'
       : '';
 

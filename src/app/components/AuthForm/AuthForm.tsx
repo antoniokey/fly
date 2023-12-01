@@ -70,12 +70,12 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
     }
   };
 
-  const onSwitchAuthTypeClick = () =>
+  const onSwitchAuthTypeClick = (): void =>
     setAuthType(
       authType === AuthType.Login
         ? AuthType.Register
         : AuthType.Login
-    )
+    );
 
   return (
     <div className="auth-form">
