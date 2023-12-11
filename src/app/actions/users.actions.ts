@@ -1,7 +1,7 @@
 import { getServerSession } from 'next-auth';
 
 import prisma from '../lib/prisma';
-import { nextAuthOptions } from '../api/auth/[...nextauth]/route';
+import { nextAuthOptions } from '../constants/auth.constants';
 import { excludeFields } from '../helpers/prisma.heplers';
 import { User } from '../interfaces/users.interfaces';
 

@@ -3,8 +3,7 @@ import { NextResponse } from 'next/server';
 
 import prisma from '@/app/lib/prisma';
 import { ConversationResponse } from '@/app/interfaces/conversations.interfaces';
-
-import { nextAuthOptions } from '../auth/[...nextauth]/route';
+import { nextAuthOptions } from '@/app/constants/auth.constants';
 
 export async function POST(request: Request): Promise<NextResponse<ConversationResponse>> {
   const session = await getServerSession(nextAuthOptions);

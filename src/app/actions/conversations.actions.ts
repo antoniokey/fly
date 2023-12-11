@@ -1,10 +1,10 @@
 import { getServerSession } from 'next-auth';
 
-import { nextAuthOptions } from '../api/auth/[...nextauth]/route';
 import prisma from '../lib/prisma';
 import { Conversation, ConversationResponse } from '../interfaces/conversations.interfaces';
 import { User } from '../interfaces/users.interfaces';
 import { excludeFields } from '../helpers/prisma.heplers';
+import { nextAuthOptions } from '../constants/auth.constants';
 
 export const getConversations = async (): Promise<Conversation[]> => {
   const session = await getServerSession(nextAuthOptions);

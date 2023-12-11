@@ -5,7 +5,7 @@ export interface PageProps {
   params?: PageParams;
 }
 
-interface PageParams {
+export interface PageParams {
   id: string;
   locale: string;
 }
