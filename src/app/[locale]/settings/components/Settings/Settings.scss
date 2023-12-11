@@ -1,0 +1,49 @@
+.user-settings {
+  @apply flex flex-col justify-center items-center gap-[40px] h-full;
+
+  &__avatar {
+    .avatar {
+      @apply w-[120px] h-[120px];
+
+      &__first-letters {
+        font-size: 40px;
+      }
+    }
+  }
+
+  &__divider {
+    @apply h-[1px] w-[40%] bg-gray-300
+  }
+
+  &__info {
+    @apply flex flex-col gap-[40px] w-[40%] bg-white p-[20px] rounded-[12px];
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  }
+
+  &__info-form {
+    @apply flex flex-col gap-[30px];
+  }
+
+  &__info-field {
+    @apply flex flex-col gap-[10px] mt-[20px];
+
+    &-label {
+      font-weight: bold;
+    }
+
+    &-input {
+      @apply h-[40px] rounded-[5px] px-[10px] text-[15px] outline-none;
+
+      border: 1px solid lightgrey;
+    }
+  }
+
+  &__info-field-error {
+    @apply text-red-400 text-[14px];
+  }
+
+  &__submit-info-button {
+    @apply bg-primary text-white rounded-[7px] py-[5px] w-[100%] text-[20px];
+  }
+}

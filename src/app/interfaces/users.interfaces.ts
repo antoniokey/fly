@@ -14,3 +14,9 @@ export interface OnlineUser {
   id: number;
   socketId: string;
 }
+
+export interface UserSettingsFormModel {
+  email: string;
+  first_name?: string | unknown;
+  last_name?: string | unknown;
+}

@@ -9,7 +9,7 @@ import { Status } from '@/app/enum/users.enum';
 
 interface AvatarProps {
   user: User;
-  status: Status;
+  status: Status | null;
 }
 
 export default function Avatar({ user, status }: AvatarProps) {
@@ -22,7 +22,7 @@ export default function Avatar({ user, status }: AvatarProps) {
           : {}
       }
     >
-      <div className={`avatar__status ${status}`}></div>
+      {status && <div className={`avatar__status ${status}`}></div>}
 
       {
         user.image

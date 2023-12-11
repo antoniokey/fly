@@ -4,14 +4,22 @@ import { PageProps } from '@/app/interfaces/common.interfaces';
 
 import Menu from './Menu/Menu';
 
-export default function SideBar({ children }: PageProps) {
+interface SideBarProps extends PageProps {
+  hasData: boolean;
+} 
+
+export default function SideBar({ children, hasData }: SideBarProps) {
   return (
-    <div className="side-bar">
+    <div className={`side-bar ${!hasData ? 'side-bar__no-data' : ''}`}>
       <Menu />
 
-      <div className="side-bar__data">
-        {children}
-      </div>
+      {
+        hasData && (
+          <div className="side-bar__data">
+            {children}
+          </div>
+        )
+      }
     </div>
   );
 }

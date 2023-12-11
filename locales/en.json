@@ -44,5 +44,16 @@
     "status": {
       "online": "Online"
     }
+  },
+  "settings": {
+    "user_was_successfully_updated": "User was successfully updated",
+    "fields": {
+      "email": "Email",
+      "first_name": "First name",
+      "last_name": "Last name"
+    },
+    "actions": {
+      "save": "Save"
+    }
   }
 }

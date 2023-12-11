@@ -13,7 +13,7 @@ export default async function UsersLayout({ children }: PageProps) {
 
   return (
     <div className="users-layout common-page flex">
-      <SideBar>
+      <SideBar hasData={true}>
         <UserList
           users={users}
           conversations={conversations}

@@ -44,5 +44,16 @@
     "status": {
       "online": "En línea"
     }
+  },
+  "settings": {
+    "user_was_successfully_updated": "El usuario fue actualizado exitosamente",
+    "fields": {
+      "email": "Correo electrónico",
+      "first_name": "Nombre de pila",
+      "last_name": "Apellido"
+    },
+    "actions": {
+      "save": "Ahorrar"
+    }
   }
 }
