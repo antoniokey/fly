@@ -91,6 +91,7 @@ export default function Settings() {
                 )
               }
             </div>
+
             <div className="user-settings__info-field">
               <label className="user-settings__info-field-label">
                 {translate('settings.fields.last_name')}

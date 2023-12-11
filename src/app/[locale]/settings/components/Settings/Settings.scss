@@ -12,21 +12,23 @@
   }
 
   &__divider {
-    @apply h-[1px] w-[40%] bg-gray-300
+    @apply h-[1px] w-[40%] bg-gray-300;
   }
 
   &__info {
-    @apply flex flex-col gap-[40px] w-[40%] bg-white p-[20px] rounded-[12px];
-
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    @apply flex flex-col gap-[40px] w-[40%] bg-white p-[20px];
   }
 
   &__info-form {
-    @apply flex flex-col gap-[30px];
+    @apply flex flex-col gap-[50px];
+  }
+
+  &__info-fields {
+    @apply flex flex-col gap-[25px];
   }
 
   &__info-field {
-    @apply flex flex-col gap-[10px] mt-[20px];
+    @apply flex flex-col gap-[10px];
 
     &-label {
       font-weight: bold;
