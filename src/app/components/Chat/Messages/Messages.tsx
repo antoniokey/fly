@@ -27,7 +27,8 @@ export default function Messages({ messages, sender }: MessagesProps) {
 
     socket.on(
       'message',
-      message => setMessagesData([...messagesData, message]),
+      message =>
+        setMessagesData(previousMessages => [...previousMessages, message]),
     );
 
     return () => {

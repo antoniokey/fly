@@ -14,7 +14,6 @@ export default async function handler(
       session,
     } = request.body as any;
 
-
     const createdMessage = await prisma.messages.create({
       data: {
         message,
