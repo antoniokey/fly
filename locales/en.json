@@ -30,8 +30,10 @@
   "chat": {
     "empty": "Select a chat or start a new conversation",
     "message_field_placeholder": "Write a message",
+    "no_messages": "No messages yet...",
     "settings_menu": {
-      "leave": "Leave"
+      "leave": "Leave",
+      "clear": "Clear"
     }
   },
   "conversations": {

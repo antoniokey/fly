@@ -21,8 +21,17 @@
     top: 55px !important;
     left: 1290px !important;
 
-    a:focus {
-      box-shadow: none !important;
+    a {
+      text-decoration: none;
+
+      &:focus {
+        box-shadow: none !important;
+      }
+    }
+
+    ul {
+      margin-bottom: unset;
+      padding: unset;
     }
 
     &-leave {

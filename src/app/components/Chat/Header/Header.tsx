@@ -22,9 +22,17 @@ interface HeaderProps {
   receiver: User;
   isNewChat: boolean;
   onLeaveChat: () => void;
+  onClearChat: () => void;
 }
 
-export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps) {
+export default function Header(
+  {
+    receiver,
+    isNewChat,
+    onLeaveChat,
+    onClearChat,
+  }: HeaderProps,
+) {
   const status = useStatus(receiver.id);
   const router = useRouter();
 
@@ -73,6 +81,7 @@ export default function Header({ receiver, isNewChat, onLeaveChat }: HeaderProps
                     getHeaderSettingsMenuItems(
                       translate,
                       onLeaveChat,
+                      onClearChat,
                     )
                   }
                   className="chat-header__settings-menu"

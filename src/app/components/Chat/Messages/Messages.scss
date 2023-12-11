@@ -2,4 +2,8 @@
   @apply flex flex-col gap-[10px] px-[15px] py-[20px] overflow-scroll;
 
   height: calc(100% - 155px);
+
+  &__no-messages {
+    @apply flex justify-center items-center h-full text-[18px];
+  }
 }

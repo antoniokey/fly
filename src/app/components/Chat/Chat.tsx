@@ -71,6 +71,9 @@ export default function Chat(
     router.refresh();
   };
 
+  const onClearChat = (): Promise<void> =>
+    axios.delete(`/api/socket/messages?conversationId=${params?.id}`);
+
   return (
     <div className="chat">
       {
@@ -81,6 +84,7 @@ export default function Chat(
                   receiver={conversation?.receiver as User}
                   isNewChat={isNewChat}
                   onLeaveChat={onLeaveChat}
+                  onClearChat={onClearChat}
                 />
                 <Messages
                   messages={conversation?.messages || []}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import './Messages.scss';
 
@@ -19,6 +20,7 @@ export default function Messages({ messages, sender }: MessagesProps) {
   const [messagesData, setMessagesData] = useState(messages);
 
   const { socket } = useSocket();
+  const { t: translate } = useTranslation();
 
   useEffect(() => {
     if (!socket) {
@@ -26,9 +28,14 @@ export default function Messages({ messages, sender }: MessagesProps) {
     }
 
     socket.on(
-      'message',
+      'new-message',
       message =>
         setMessagesData(previousMessages => [...previousMessages, message]),
+    );
+
+    socket.on(
+      'clear-messages',
+      () => setMessagesData(() => []),
     );
 
     return () => {
@@ -39,13 +46,21 @@ export default function Messages({ messages, sender }: MessagesProps) {
   return (
     <div className="chat-messages">
       {
-        messagesData.map((message, index) => (
-          <Message
-            key={index}
-            message={message}
-            sender={sender}
-          />
-        ))
+        messagesData.length
+          ? (
+              messagesData.map((message, index) => (
+                <Message
+                  key={index}
+                  message={message}
+                  sender={sender}
+                />
+              ))
+            )
+          : (
+              <div className="chat-messages__no-messages">
+                {translate('chat.no_messages')}
+              </div>
+            )
       }
     </div>
   );

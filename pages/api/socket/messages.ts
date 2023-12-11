@@ -23,9 +23,19 @@ export default async function handler(
       },
     });
 
-    response.socket.server.io.emit('message', createdMessage);
+    response.socket.server.io.emit('new-message', createdMessage);
+  }
 
-    return response.end(null);
+  if (request.method === 'DELETE') {
+    const { searchParams } = new URL(`${process.env.BASE_URL}${request.url}`);
+
+    const conversationId = searchParams.get('conversationId') as string;
+
+    await prisma.messages.deleteMany({
+      where: { conversation_id: +conversationId }
+    });
+
+    response.socket.server.io.emit('clear-messages');
   }
   
   return response.end(null);
