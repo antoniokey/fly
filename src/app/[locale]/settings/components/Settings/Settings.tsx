@@ -46,6 +46,7 @@ export default function Settings() {
         <Avatar
           user={user}
           status={null}
+          isEditable={true}
         />
       </div>
 
@@ -64,7 +65,7 @@ export default function Settings() {
               <input
                 className="user-settings__info-field-input"
                 type="email"
-                {...register('email', { required: true, value: user.email })}
+                {...register('email', { required: true, value: user?.email || '' })}
               />
               {
                 errors.email && (
@@ -81,7 +82,7 @@ export default function Settings() {
               </label>
               <input
                 className="user-settings__info-field-input"
-                {...register('first_name', { required: true, value: user.first_name })}
+                {...register('first_name', { required: true, value: user?.first_name || '' })}
               />
               {
                 errors.first_name && (
@@ -98,7 +99,7 @@ export default function Settings() {
               </label>
               <input
                 className="user-settings__info-field-input"
-                {...register('last_name', { required: true, value: user.last_name })}
+                {...register('last_name', { required: true, value: user?.last_name || '' })}
               />
               {
                 errors.last_name && (

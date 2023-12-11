@@ -1,0 +1,35 @@
+.avatar-editor {
+  @apply flex flex-col justify-center gap-[30px] items-center h-full;
+
+  &__preview {
+    .avatar {
+      @apply w-[120px] h-[120px];
+
+      &__first-letters {
+        font-size: 40px;
+      }
+    }
+  }
+
+  &__pickers {
+    @apply flex items-center gap-[30px];
+  }
+
+  &__color-picker,
+  &__color-picker-widget {
+    width: 300px !important;
+  }
+
+  &__color-picker-widget {
+    height: 300px !important;
+  }
+
+  &__color-picker,
+  &__image-picker {
+    @apply flex flex-col gap-[15px] items-center;
+  }
+
+  &__save-button {
+    @apply bg-primary text-white rounded-[7px] py-[5px] w-[150px] text-[20px] text-center mt-[50px] cursor-pointer;
+  }
+}

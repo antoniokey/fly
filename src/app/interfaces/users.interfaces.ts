@@ -20,3 +20,8 @@ export interface UserSettingsFormModel {
   first_name?: string | unknown;
   last_name?: string | unknown;
 }
+
+export interface AvatarEditorModalState {
+  imageColor: string;
+  image: string | null;
+}

@@ -33,6 +33,7 @@ export default function Conversation({ conversation }: Conversation) {
       <Avatar
         user={conversation.receiver}
         status={status}
+        isEditable={false}
       />
 
       <div className="conversation__info">

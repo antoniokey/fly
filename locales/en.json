@@ -47,6 +47,7 @@
   },
   "settings": {
     "user_was_successfully_updated": "User was successfully updated",
+    "avatar_was_successfully_updated": "Avatar was successfully updated",
     "fields": {
       "email": "Email",
       "first_name": "First name",
@@ -54,6 +55,11 @@
     },
     "actions": {
       "save": "Save"
+    },
+    "avatar_editor": {
+      "select_color": "Select color",
+      "select_image": "Select image",
+      "delimiter": "or"
     }
   }
 }

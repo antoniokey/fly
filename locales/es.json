@@ -47,6 +47,7 @@
   },
   "settings": {
     "user_was_successfully_updated": "El usuario fue actualizado exitosamente",
+    "avatar_was_successfully_updated": "Avatar fue actualizada con éxito",
     "fields": {
       "email": "Correo electrónico",
       "first_name": "Nombre de pila",
@@ -54,6 +55,11 @@
     },
     "actions": {
       "save": "Ahorrar"
+    },
+    "avatar_editor": {
+      "select_color": "Seleccionar el color",
+      "select_image": "Seleccionar imagen",
+      "delimiter": "o"
     }
   }
 }

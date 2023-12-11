@@ -47,6 +47,7 @@ export default function User({ user, conversations }: UserProps) {
       <Avatar
         user={user}
         status={status}
+        isEditable={false}
       />
 
       <div className="user__info">

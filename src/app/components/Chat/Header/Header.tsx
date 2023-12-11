@@ -46,6 +46,7 @@ export default function Header(
         <Avatar
           status={status}
           user={receiver}
+          isEditable={false}
         />
 
         <div className="chat-header__user-info">

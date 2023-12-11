@@ -59,8 +59,10 @@ export const nextAuthOptions: NextAuthOptions = {
       return session;
     },
 
-    jwt({ user, token }) {
-      if (user) {
+    jwt({ user, token, trigger, session }) {
+      if (trigger === 'update' && session.user) {
+        token.user = session.user;
+      } else if (user) {
         token.user = user;
       }
 
