@@ -20,7 +20,7 @@ export default function ConversationList({ conversations }: ConversationListProp
         {translate('conversations.conversations_list_title')}
       </div>
 
-      <div className="conversation-list__users">
+      <div className="conversation-list__conversations">
         {conversations.map(conversation => (
           <Conversation
             key={conversation.id}

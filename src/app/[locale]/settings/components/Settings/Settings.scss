@@ -12,11 +12,11 @@
   }
 
   &__divider {
-    @apply h-[1px] w-[40%] bg-gray-300;
+    @apply h-[1px] w-[90%] max-w-[500px] bg-gray-300;
   }
 
   &__info {
-    @apply flex flex-col gap-[40px] w-[40%] bg-white p-[20px];
+    @apply flex flex-col gap-[40px] w-[90%] max-w-[500px] bg-white;
   }
 
   &__info-form {
@@ -25,6 +25,10 @@
 
   &__info-fields {
     @apply flex flex-col gap-[25px];
+
+    @media(max-width: 520px) {
+      gap: 15px;
+    }
   }
 
   &__info-field {
@@ -47,5 +51,9 @@
 
   &__submit-info-button {
     @apply bg-primary text-white rounded-[7px] py-[5px] w-[100%] text-[20px];
+  }
+
+  @media(max-width: 520px) {
+    @apply gap-[20px] relative top-[calc(50%-70px)] translate-y-[-30%];
   }
 }

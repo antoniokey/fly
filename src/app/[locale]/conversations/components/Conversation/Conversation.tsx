@@ -27,7 +27,7 @@ export default function Conversation({ conversation }: Conversation) {
 
   return (
     <div
-      className={`conversation ${isItemSelected(pathname || '', conversation.id) && 'selected'}`}
+      className={`conversation ${isItemSelected(pathname || '', conversation.id) ? 'selected' : ''}`}
       onClick={onConversationClick}
     >
       <Avatar

@@ -9,7 +9,7 @@ export default async function UserPage({ params: { id } }: { params: PageParams 
   const conversation: Pick<Conversation, 'receiver'> = { receiver: user };
 
   return (
-    <div className="user-page w-[70%]">
+    <div className="user-page common-page common-chat-page">
       <Chat
         isOpen={true}
         isNewChat={true}

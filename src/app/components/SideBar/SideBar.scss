@@ -1,11 +1,33 @@
 .side-bar {
-  @apply flex gap-[0px] w-[30%] h-full border-r-gray-300 border-r-[1px];
+  @apply flex gap-[0px] w-[400px] h-full border-r-gray-300 border-r-[1px];
 
   &__no-data {
-    @apply w-auto border-r-0;
+    border: 0;
+    width: unset !important
+  }
+
+  &__chat-page {
+    .side-bar__data {
+      @media(max-width: 786px) {
+        display: none;
+      }
+    }
   }
 
   &__data {
     @apply w-full p-[20px];
+
+    @media(max-width: 520px) {
+      height: 100%;
+    }
+  }
+
+  @media(max-width: 786px) {
+    width: fit-content;
+    border: 0;
+  }
+
+  @media(max-width: 520px) {
+    @apply flex-col-reverse w-full;
   }
 }

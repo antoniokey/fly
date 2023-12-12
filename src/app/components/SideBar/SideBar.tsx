@@ -1,16 +1,27 @@
-import './SideBar.scss';
+'use client';
 
-import { PageProps } from '@/app/interfaces/common.interfaces';
+import { useParams } from 'next/navigation';
+
+import './SideBar.scss';
 
 import Menu from './Menu/Menu';
 
-interface SideBarProps extends PageProps {
+interface SideBarProps {
+  children?: React.ReactNode;
   hasData: boolean;
 } 
 
 export default function SideBar({ children, hasData }: SideBarProps) {
+  const params = useParams();
+
   return (
-    <div className={`side-bar ${!hasData ? 'side-bar__no-data' : ''}`}>
+    <div
+      className={`
+          side-bar
+          ${!hasData ? 'side-bar__no-data' : ''}
+          ${params?.id ? 'side-bar__chat-page' : ''}
+      `}
+    >
       <Menu />
 
       {

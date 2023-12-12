@@ -11,5 +11,13 @@
         @apply text-primary;
       }
     }
+
+    @media(max-width: 520px) {
+      @apply flex-row gap-[35px];
+    }
+  }
+
+  @media(max-width: 520px) {
+    @apply flex-row border-t-gray-300 border-t-[1px] border-r-0 h-[70px];   
   }
 }

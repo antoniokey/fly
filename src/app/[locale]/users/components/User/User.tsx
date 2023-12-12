@@ -41,7 +41,7 @@ export default function User({ user, conversations }: UserProps) {
   
   return (
     <div
-      className={`user ${isItemSelected(pathname || '', user.id) && 'selected'}`}
+      className={`user ${isItemSelected(pathname || '', user.id) ? 'selected' : ''}`}
       onClick={onUserClick}
     >
       <Avatar

@@ -6,7 +6,7 @@ export default async function ConversationPage({ params: { id } }: { params: Pag
   const conversation = await getConversation(+id);
 
   return (
-    <div className="conversation-page w-[70%]">
+    <div className="conversation-page common-page common-chat-page">
       <Chat 
         isOpen={true}
         conversation={conversation}

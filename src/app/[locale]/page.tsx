@@ -52,7 +52,7 @@ export default function HomePage() {
           }
         </div>
 
-        <div className='home-page__auth-form'>
+        <div className='home-page__auth-form w-full'>
           <AuthForm
             authType={authType}
             setAuthType={setAuthType}

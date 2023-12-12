@@ -7,7 +7,7 @@ export default async function ConversationsLayout({ children }: PageProps) {
   const conversations = await getConversations();
 
   return (
-    <div className="conversations-layout common-page flex">
+    <div className="conversations-layout common-layout">
       <SideBar hasData={true}>
         <ConversationList conversations={conversations} />
       </SideBar>

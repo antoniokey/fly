@@ -3,9 +3,31 @@
 @tailwind utilities;
 
 @layer utilities {
-  .common-page {
+  .common-layout {
     background-color: white;
     height: 100%;
+    display: flex;
+
+    &.settings-layout {
+      @media(max-width: 520px) {
+        flex-direction: column-reverse;
+      }
+    }
+  }
+
+  .common-page {
+    width: calc(100% - 400px);
+
+    @media(max-width: 786px) {
+      display: none;
+    }
+  }
+
+  .common-chat-page {
+    @media(max-width: 786px) {
+      display: initial;
+      width: 100%;
+    }
   }
 }
 
