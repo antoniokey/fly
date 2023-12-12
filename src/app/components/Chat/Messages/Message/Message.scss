@@ -2,11 +2,11 @@
   @apply flex gap-[15px] py-[5px] px-[10px] rounded-[15px] bg-primary w-fit;
 
   &.sender {
-    @apply rounded-br-[0px] self-end;
+    @apply rounded-br-[0px] self-end ml-[50px];
   }
 
   &.receiver {
-    border-bottom-left-radius: 0px;
+    @apply rounded-bl-[0px] mr-[50px];
   }
 
   &__text {

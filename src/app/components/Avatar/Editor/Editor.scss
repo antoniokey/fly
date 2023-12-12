@@ -1,5 +1,5 @@
 .avatar-editor {
-  @apply flex flex-col justify-center gap-[30px] items-center h-full;
+  @apply flex flex-col justify-center gap-[30px] items-center;
 
   &__preview {
     .avatar {
@@ -12,12 +12,17 @@
   }
 
   &__pickers {
-    @apply flex items-center gap-[30px];
+    @apply flex items-center gap-[35px];
+
+    @media(max-width: 786px) {
+      flex-direction: column;
+      gap: 40px;
+    }
   }
 
   &__color-picker,
   &__color-picker-widget {
-    width: 300px !important;
+    width: 100% !important;
   }
 
   &__color-picker-widget {

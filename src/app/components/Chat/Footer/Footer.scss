@@ -8,7 +8,8 @@
       @apply
         h-[40px]
         rounded-[25px]
-        px-[10px]
+        pl-[15px]
+        pr-[50px]
         text-[15px]
         outline-none
         border-[1px]
@@ -18,7 +19,7 @@
     }
 
     .EmojiPickerReact {
-      @apply bottom-[40px] right-0;
+      @apply bottom-[40px] right-0 max-w-[300px] h-[350px] w-[90%];
 
       position: absolute !important;
 
@@ -42,7 +43,7 @@
       rounded-[50%]
       bg-primary
       h-[40px]
-      w-[40px]
+      min-w-[40px]
       text-white
       text-[20px]
       flex

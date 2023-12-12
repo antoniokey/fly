@@ -69,10 +69,6 @@ export default function Editor({ user, onAvatarEditorSave }: EditorProps) {
           />
         </div>
 
-        <div className="avatar-editor__pickers-delimiter">
-          {translate('settings.avatar_editor.delimiter')}
-        </div>
-
         <div className="avatar-editor__image-picker">
           <div className="avatar-editor__image-picker-title">
             {translate('settings.avatar_editor.select_image')}

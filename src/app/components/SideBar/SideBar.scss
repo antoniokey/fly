@@ -12,6 +12,14 @@
         display: none;
       }
     }
+
+    @media(max-width: 786px) {
+      width: fit-content !important;
+    }
+
+    @media(max-width: 520px) {
+      height: 70px;
+    }
   }
 
   &__data {
@@ -23,11 +31,12 @@
   }
 
   @media(max-width: 786px) {
-    width: fit-content;
+    width: 100vw;
     border: 0;
   }
 
   @media(max-width: 520px) {
-    @apply flex-col-reverse w-full;
+    flex-direction: column-reverse;
+    width: 100% !important;
   }
 }

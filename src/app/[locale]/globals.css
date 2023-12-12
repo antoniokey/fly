@@ -13,6 +13,10 @@
         flex-direction: column-reverse;
       }
     }
+
+    @media(max-width: 520px) {
+      flex-direction: column-reverse;
+    }
   }
 
   .common-page {
@@ -20,6 +24,10 @@
 
     @media(max-width: 786px) {
       display: none;
+    }
+
+    @media(max-width: 520px) {
+      height: 100%;
     }
   }
 
