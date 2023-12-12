@@ -14,7 +14,7 @@ interface MessageProps {
 }
 
 export default function Message({ message, sender }: MessageProps) {
-  const messageType = message.sender_id === sender.id
+  const messageType = message?.sender_id === sender?.id
     ? MessageUserType.Sender
     : MessageUserType.Receiver;
 

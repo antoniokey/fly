@@ -42,7 +42,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       },
     });
 
-    return new NextResponse();
+    return new NextResponse(null);
   } catch(error: any) {
     return new NextResponse(error, { status: 500 });
   }

@@ -33,7 +33,7 @@ export default function Header(
     onClearChat,
   }: HeaderProps,
 ) {
-  const status = useStatus(receiver.id);
+  const status = useStatus(receiver?.id);
   const router = useRouter();
 
   const menuRef: any = useRef();

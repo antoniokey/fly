@@ -37,7 +37,7 @@ export default function SocketProvider({ children }: PageProps) {
     socketInstance.on('connect', () => {
       setIsConnected(true);
 
-      socketInstance.emit('user-online', session.data?.user.id);
+      socketInstance.emit('user-online', session.data?.user?.id);
     });
 
     socketInstance.on('disconnect', () => setIsConnected(false));
