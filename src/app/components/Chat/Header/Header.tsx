@@ -84,7 +84,7 @@ export default function Header(
 
       {
         isNewChat
-          ? (
+          ? screenSize.width > ScreenSize.Mobile && (
               <IoCloseOutline
                 className="chat-header__close-button"
                 onClick={() => router.back()}

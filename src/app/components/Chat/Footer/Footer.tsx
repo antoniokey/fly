@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 import { UseFormReset, useForm } from 'react-hook-form';
@@ -11,6 +11,7 @@ import EmojiPicker, { EmojiClickData } from 'emoji-picker-react';
 import './Footer.scss';
 
 import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
+import ClickOutside from '@/app/hoc/ClickOutside';
 
 interface FooterProps {
   onSendMessage: (resetMessageField: UseFormReset<MessageFieldFormValues>) =>
@@ -19,6 +20,8 @@ interface FooterProps {
 
 export default function Footer({ onSendMessage }: FooterProps) {
   const [isEmojiOpened, setIsEmojiOpened] = useState(false);
+
+  const emojiPickerRef = useRef();
 
   const {
     handleSubmit,
@@ -32,6 +35,10 @@ export default function Footer({ onSendMessage }: FooterProps) {
 
   const onEmojiClick = (emojiData: EmojiClickData) =>
     setValue('message', `${getValues().message} ${emojiData.emoji}`);
+
+  function onEmojiClose() {
+    setIsEmojiOpened(false);
+  }
 
   return (
     <div className="chat-footer common-chat-body-section">
@@ -51,7 +58,19 @@ export default function Footer({ onSendMessage }: FooterProps) {
           <span className="chat-footer__emoji-label">🙂</span>
         </div>
 
-        {isEmojiOpened && <EmojiPicker onEmojiClick={onEmojiClick} />}
+        {
+          isEmojiOpened && (
+            <ClickOutside
+              elementRef={emojiPickerRef}
+              callback={onEmojiClose}
+            >
+              <EmojiPicker
+                onEmojiClick={onEmojiClick}
+                autoFocusSearch={false}
+              />
+            </ClickOutside>
+          )
+        }
       </form>
 
       <div

@@ -41,27 +41,29 @@ export default function Chat(
   const onSendMessage =
     (resetMessageField: UseFormReset<MessageFieldFormValues>): (data: MessageFieldFormValues) => Promise<void> =>
       async (data: MessageFieldFormValues): Promise<void> => {
-        let conversationId;
+        if (data.message) {
+          let conversationId;
 
-        if (conversation?.id) {
-          conversationId = conversation.id;
-        } else {
-          const createdConversation = (await axios.post(
-            '/api/conversations',
-            { receiverId: conversation?.receiver?.id },
-          )).data;
+          if (conversation?.id) {
+            conversationId = conversation.id;
+          } else {
+            const createdConversation = (await axios.post(
+              '/api/conversations',
+              { receiverId: conversation?.receiver?.id },
+            )).data;
 
-          conversationId = createdConversation.id;
+            conversationId = createdConversation.id;
+          }
+
+          await axios.post('/api/socket/messages', {
+            session,
+            conversationId,
+            receiverId: conversation?.receiver?.id,
+            message: data.message,
+          });
+
+          resetMessageField();
         }
-
-        await axios.post('/api/socket/messages', {
-          session,
-          conversationId,
-          receiverId: conversation?.receiver?.id,
-          message: data.message,
-        });
-
-        resetMessageField();
       };
 
   const onLeaveChat = async (): Promise<void> => {
