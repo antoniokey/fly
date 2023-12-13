@@ -17,6 +17,7 @@ import './AuthForm.scss';
 import { getAuthFormValidationSchema } from '@/app/constants/validation/auth-form.validation';
 import { AuthFormModel } from '@/app/interfaces/auth.interfaces';
 import { AuthType } from '@/app/enum/auth.enum';
+import { useLoader } from '@/app/hooks/useLoader';
 
 interface AuthFormProps {
   authType: AuthType;
@@ -25,6 +26,8 @@ interface AuthFormProps {
 
 export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
   const { t: translate } = useTranslation();
+
+  const { setIsLoading } = useLoader();
 
   const {
     register,
@@ -37,6 +40,8 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
 
   const onFormSubmit = async (data: AuthFormModel) => {
     if (authType === AuthType.Login) {
+      setIsLoading(true);
+
       try {
         await signIn(
           'credentials',
@@ -48,6 +53,8 @@ export default function AuthForm({ authType, setAuthType }: AuthFormProps) {
       } catch(error: any) {
         toast.error(error.response?.data || error.message || translate('errors.something_goes_wrong'));
       }
+
+      setIsLoading(false);
     } else {
       try {
         await axios.post(

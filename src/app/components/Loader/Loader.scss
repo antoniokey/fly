@@ -1,0 +1,12 @@
+.loader {
+  @apply absolute top-0 h-full w-full flex justify-center items-center;
+
+  &.active {
+    z-index: 1;
+  }
+
+  span {
+    border-color: rgb(14 165 233) !important;
+    border-width: 3px !important;
+  }
+}

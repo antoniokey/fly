@@ -6,10 +6,17 @@
   }
 
   &__auth {
-    @apply flex flex-col items-center relative top-[50%] translate-y-[-50%] gap-[20px];
+    @apply flex flex-col items-center relative top-[50%] translate-y-[-50%] gap-[20px] z-[1];
 
     &-title {
       @apply font-bold text-[25px];
+    }
+  }
+
+  &.loader-active {
+    .home-page__language-selection,
+    .home-page__auth {
+      opacity: 0.5;
     }
   }
 }

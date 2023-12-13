@@ -15,10 +15,11 @@ import TranslationsProvider from '../providers/TranslationsProvider';
 import AuthProvider from '../providers/AuthProvider';
 import SocketProvider from '../providers/SocketProvider';
 import { PageProps } from '../interfaces/common.interfaces';
+import LoaderProvider from '../providers/LoaderProvider';
 
 export const metadata: Metadata = { title: 'Fly' };
 
-export default function RootLayout(
+export default async function RootLayout(
   {
     children,
     params: { locale },
@@ -34,19 +35,21 @@ export default function RootLayout(
       <body className="h-[100vh]">
         <AuthProvider>
           <TranslationsProvider locale={locale}>
-            <PrimeReactProvider>
-              <SocketProvider>
-                {children}
-              </SocketProvider>
-            </PrimeReactProvider>
+            <LoaderProvider>
+              <PrimeReactProvider>
+                <SocketProvider>
+                  {children}
+                </SocketProvider>
+              </PrimeReactProvider>
 
-            <ToastContainer
-              position="bottom-right"
-              closeOnClick={true}
-              hideProgressBar={true}
-              autoClose={3000}
-              transition={Slide}
-            />
+              <ToastContainer
+                position="bottom-right"
+                closeOnClick={true}
+                hideProgressBar={true}
+                autoClose={3000}
+                transition={Slide}
+              />
+            </LoaderProvider>
           </TranslationsProvider>
         </AuthProvider>
       </body>
