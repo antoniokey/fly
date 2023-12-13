@@ -34,7 +34,7 @@ export default function Footer({ onSendMessage }: FooterProps) {
     setValue('message', `${getValues().message} ${emojiData.emoji}`);
 
   return (
-    <div className="chat-footer">
+    <div className="chat-footer common-chat-body-section">
       <form
         className="chat-footer__form"
         onSubmit={handleSubmit(onSendMessage(reset))}

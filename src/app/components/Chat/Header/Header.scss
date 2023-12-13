@@ -6,6 +6,20 @@
 
     &-info {
       @apply flex flex-col justify-center;
+
+      @media(max-width: 520px) {
+        @apply justify-normal items-center m-auto;
+      }
+    }
+
+    .avatar {
+      @media(max-width: 520px) {
+        @apply absolute cursor-pointer;
+      }
+    }
+
+    @media(max-width: 520px) {
+      @apply flex-row-reverse w-full items-center;
     }
   }
 
@@ -39,6 +53,10 @@
         @apply text-red-500;
       }
     }
+
+    @media(max-width: 520px) {
+      transform: unset;
+    }
   }
 
   &__close-button {
@@ -47,5 +65,17 @@
 
   &__settings-button {
     @apply text-[30px] text-primary cursor-pointer;
+
+    @media(max-width: 520px) {
+      display: none;
+    }
+  }
+
+  &__back-button {
+    display: none;
+
+    @media(max-width: 520px) {
+      @apply block text-primary text-[23px] absolute cursor-pointer;
+    }
   }
 }

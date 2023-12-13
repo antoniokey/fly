@@ -22,9 +22,10 @@ interface AvatarProps {
   user: User;
   status: Status | null;
   isEditable: boolean;
+  onClick?: (event?: any) => void;
 }
 
-export default function Avatar({ user, status, isEditable }: AvatarProps) {
+export default function Avatar({ user, status, isEditable, onClick }: AvatarProps) {
   const session = useSession();
 
   const [isAvatarEditorModalOpened, setIsAvatarEditorModalOpened] = useState(false);
@@ -55,6 +56,7 @@ export default function Avatar({ user, status, isEditable }: AvatarProps) {
           ? { background: user.image_color }
           : {}
       }
+      onClick={onClick}
     >
       {status && <div className={`avatar__status ${status}`}></div>}
 

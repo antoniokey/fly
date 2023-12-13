@@ -1,5 +1,5 @@
 .chat-footer {
-  @apply flex items-center h-[75px] gap-[15px] border-t-gray-300 border-t-[1px] px-[10px];
+  @apply flex items-center h-[75px] gap-[15px] border-t-gray-300 border-t-[1px] px-[10px] bottom-0;
 
   &__form {
     @apply w-full relative flex items-center;

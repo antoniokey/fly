@@ -3,7 +3,7 @@
 
   &__no-data {
     border: 0;
-    width: unset !important
+    width: unset !important;
   }
 
   &__chat-page {
@@ -19,11 +19,12 @@
 
     @media(max-width: 520px) {
       height: 70px;
+      display: none;
     }
   }
 
   &__data {
-    @apply w-full p-[20px];
+    @apply w-full p-[20px] overflow-auto pt-0;
 
     @media(max-width: 520px) {
       height: 100%;

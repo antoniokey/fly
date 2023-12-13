@@ -31,9 +31,31 @@
     }
   }
 
+  .common-page-title {
+    position: fixed;
+    width: 290px;
+    height: 100px;
+    z-index: 1;
+    background: white;
+    padding-top: 20px;
+  }
+
   .common-chat-page {
     @media(max-width: 786px) {
       display: initial;
+      width: 100%;
+    }
+  }
+
+  .common-chat-body-section {
+    position: fixed;
+    width: calc(100% - 400px);
+
+    @media(max-width: 786px) {
+      width: calc(100% - 80px);
+    }
+
+    @media(max-width: 520px) {
       width: 100%;
     }
   }

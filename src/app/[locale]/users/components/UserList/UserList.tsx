@@ -19,7 +19,7 @@ export default function UserList({ users, conversations }: UserListProps) {
 
   return (
     <div className="user-list">
-      <div className="user-list__title">
+      <div className="user-list__title common-page-title">
         {translate('users.users_list_title')}
       </div>
 

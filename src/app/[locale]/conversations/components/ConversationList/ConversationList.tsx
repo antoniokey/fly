@@ -16,7 +16,7 @@ export default function ConversationList({ conversations }: ConversationListProp
 
   return (
     <div className="conversation-list">
-      <div className="conversation-list__title">
+      <div className="conversation-list__title common-page-title">
         {translate('conversations.conversations_list_title')}
       </div>
 
