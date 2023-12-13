@@ -1,5 +1,5 @@
 .user-settings {
-  @apply flex flex-col justify-center items-center gap-[40px] h-full;
+  @apply flex flex-col justify-center items-center gap-[40px] h-full ml-[87px] w-[calc(100%-87px)];
 
   &__avatar {
     .avatar {
@@ -54,6 +54,6 @@
   }
 
   @media(max-width: 520px) {
-    @apply gap-[20px] relative top-[calc(50%-70px)] translate-y-[-30%];
+    @apply gap-[20px] h-[calc(100%-70px)] m-auto;
   }
 }

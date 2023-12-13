@@ -1,5 +1,5 @@
 .side-bar {
-  @apply flex gap-[0px] w-[400px] h-full border-r-gray-300 border-r-[1px];
+  @apply flex gap-[0px] w-[400px] h-full border-r-gray-300 border-r-[1px] fixed;
 
   &__no-data {
     border: 0;

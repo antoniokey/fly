@@ -33,23 +33,36 @@
 
   .common-page-title {
     position: fixed;
-    width: 290px;
-    height: 100px;
+    height: 80px;
     z-index: 1;
     background: white;
     padding-top: 20px;
+    width: 290px;
+
+    @media(max-width: 520px) {
+      width: 100%;
+    }
   }
 
   .common-chat-page {
+    margin-left: 400px;
+
     @media(max-width: 786px) {
       display: initial;
       width: 100%;
+      margin-left: 87px;
+    }
+
+    @media(max-width: 520px) {
+      margin-left: 0;
     }
   }
 
   .common-chat-body-section {
     position: fixed;
     width: calc(100% - 400px);
+    z-index: 1;
+    background: white;
 
     @media(max-width: 786px) {
       width: calc(100% - 80px);

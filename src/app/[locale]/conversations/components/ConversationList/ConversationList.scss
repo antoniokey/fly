@@ -1,5 +1,5 @@
 .conversation-list {
-  @apply flex flex-col gap-[30px] w-full;
+  @apply flex flex-col gap-[30px] w-full h-full;
 
   &__title {
     font-weight: bold;
@@ -7,6 +7,6 @@
   }
 
   &__conversations {
-    @apply flex flex-col gap-[5px];
+    @apply flex flex-col gap-[5px] mt-[80px];
   }
 }

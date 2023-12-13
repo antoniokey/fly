@@ -1,9 +1,25 @@
 .chat-messages {
-  @apply flex flex-col gap-[10px] px-[15px] py-[20px] relative top-[80px] overflow-auto;
-
-  height: calc(100% - 155px);
+  @apply
+    flex
+    flex-col
+    gap-[10px]
+    px-[15px]
+    py-[20px]
+    top-[80px]
+    overflow-auto
+    fixed
+    w-[calc(100%-400px)]
+    h-[calc(100%-155px)];
 
   &__no-messages {
     @apply flex justify-center items-center h-full text-[18px];
+  }
+
+  @media(max-width: 786px) {
+    width: calc(100% - 87px);
+  }
+
+  @media(max-width: 520px) {
+    width: 100%;
   }
 }

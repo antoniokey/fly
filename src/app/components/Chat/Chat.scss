@@ -6,6 +6,8 @@
   }
 
   &__empty {
-    @apply text-[18px] flex justify-center items-center h-full;
+    @apply text-[18px] flex justify-center items-center h-full fixed ml-[400px];
+
+    width: calc(100% - 400px);
   }
 }
