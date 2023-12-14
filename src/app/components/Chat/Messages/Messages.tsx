@@ -28,13 +28,12 @@ export default function Messages({ messages, sender }: MessagesProps) {
     }
 
     socket.on(
-      'new-message',
-      message =>
-        setMessagesData(previousMessages => [...previousMessages, message]),
+      'receive-message',
+      message => setMessagesData(previousMessages => [...previousMessages, message]),
     );
 
     socket.on(
-      'clear-messages',
+      'receive-clear-messages',
       () => setMessagesData(() => []),
     );
 

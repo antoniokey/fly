@@ -35,6 +35,18 @@ const ioHandler = (
     response.socket.server.io = socketServer;
 
     socketServer.on('connection', socket => {
+      socket.on('join-room', roomId => {
+        socket.join(roomId); 
+      });
+
+      socket.on('send-message', data => {
+        socketServer.to(data.roomId).emit('receive-message', data.message);
+      });
+
+      socket.on('send-clear-messages', roomId => {
+        socketServer.to(roomId).emit('receive-clear-messages');
+      });
+
       socket.on('user-online', id => {
         if (!isUserOnline(onlineUsers, id)) {
           onlineUsers.push({ id, socketId: socket.id });
