@@ -37,7 +37,15 @@
     }
   },
   "conversations": {
-    "conversations_list_title": "Conversations"
+    "conversations_list_title": "Conversations",
+    "new_chat": {
+      "new_group": "New group",
+      "cancel": "Cancel",
+      "enter_group_name": "Enter group name",
+      "actions": {
+        "save": "Save"
+      }
+    }
   },
   "users": {
     "users_list_title": "People",

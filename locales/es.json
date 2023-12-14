@@ -37,7 +37,15 @@
     }
   },
   "conversations": {
-    "conversations_list_title": "Conversaciones"
+    "conversations_list_title": "Conversaciones",
+    "new_chat": {
+      "new_group": "Nuevo grupo",
+      "cancel": "Cancelar",
+      "enter_group_name": "Introduzca el nombre del grupo",
+      "actions": {
+        "save": "Ahorrar"
+      }
+    }
   },
   "users": {
     "users_list_title": "Gente",

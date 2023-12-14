@@ -15,9 +15,10 @@ import { isItemSelected } from '@/app/helpers/common.helpers';
 interface UserProps {
   user: User;
   conversations: Conversation[];
+  onClick?: () => void;
 }
 
-export default function User({ user, conversations }: UserProps) {
+export default function User({ user, conversations, onClick }: UserProps) {
   const status = useStatus(user.id);
   const router = useRouter();
   const pathname = usePathname();
@@ -37,6 +38,8 @@ export default function User({ user, conversations }: UserProps) {
     } else {
       router.push(`/${i18n.language}/users/${user.id}`);
     }
+
+    setTimeout(() => onClick && onClick())
   };
   
   return (

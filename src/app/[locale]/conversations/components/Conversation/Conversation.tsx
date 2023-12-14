@@ -11,11 +11,11 @@ import { Conversation as IConversation } from '@/app/interfaces/conversations.in
 import { useStatus } from '@/app/hooks/useStatus';
 import { isItemSelected } from '@/app/helpers/common.helpers';
 
-interface Conversation {
+interface ConversationProps {
   conversation: IConversation;
 }
 
-export default function Conversation({ conversation }: Conversation) {
+export default function Conversation({ conversation }: ConversationProps) {
   const status = useStatus(conversation.receiver.id);
   const router = useRouter();
   const pathname = usePathname();

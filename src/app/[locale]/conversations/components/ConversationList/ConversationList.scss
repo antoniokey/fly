@@ -1,12 +1,46 @@
 .conversation-list {
   @apply flex flex-col gap-[30px] w-full h-full;
 
+  &__header {
+    @apply flex justify-between items-center;
+
+    @media(max-width: 520px) {
+      padding-right: 35px;
+    }
+  }
+
   &__title {
     font-weight: bold;
     font-size: 25px;
   }
 
+  &__new-chat-icon {
+    @apply text-primary text-[25px] cursor-pointer;
+  }
+
   &__conversations {
     @apply flex flex-col gap-[5px] mt-[80px];
+  }
+
+  &__new-chat-modal {
+    position: absolute;
+    inset: 40px;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px 30px;
+    width: fit-content;
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    overflow: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80vh;
+    max-height: 550px;
+    width: 90%;
+    max-width: 600px;
   }
 }

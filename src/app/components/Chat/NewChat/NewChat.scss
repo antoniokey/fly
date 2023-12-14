@@ -1,0 +1,57 @@
+.new-chat-modal {
+  @apply flex flex-col gap-[20px] h-full;
+
+  &__menu {
+    &::after {
+      @apply block h-[1px] rounded-[10px] bg-gray-300 mt-[25px];
+
+      content: '';
+    }
+  }
+
+  &__menu-item {
+    @apply flex items-center gap-[15px] cursor-pointer text-primary;
+
+    &-icon {
+      font-size: 25px;
+    }
+
+    &-label {
+      font-size: 18px;
+    }
+  }
+
+  &__group-name {
+    margin-top: 5px;
+  }
+
+  &__group-name-field {
+    @apply h-[40px] rounded-[10px] px-[10px] text-[15px] outline-none w-full;
+
+    border: 1px solid lightgrey;
+  }
+
+  &__data {
+    @apply flex flex-col justify-between h-full gap-[50px] pb-[20px];
+  }
+
+  &__user-item {
+    @apply flex items-center gap-[10px] w-full;
+
+    .user {
+      width: 100%;
+    }
+  }
+
+  &__checkbox {
+    @apply w-[20px] h-[20px] accent-primary text-white;
+  }
+
+  &__buttons {
+    @apply flex justify-center pb-[20px];
+  }
+
+  &__save-button {
+    @apply bg-primary text-white rounded-[7px] py-[5px] w-[130px] text-[20px] text-center cursor-pointer;
+  }
+}
