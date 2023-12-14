@@ -73,7 +73,10 @@ export default function NewChat({ users, conversations, onNewChatModalClose }: N
       <div className="new-chat-modal__data">
         <div className="new-chat-modal__users">
           {users.map(user => (
-            <div className="new-chat-modal__user-item">
+            <div
+              className="new-chat-modal__user-item"
+              key={user.id}
+            >
               {
                 isMultipleUsersSelected && (
                   <input
@@ -87,7 +90,6 @@ export default function NewChat({ users, conversations, onNewChatModalClose }: N
 
               <User
                 onClick={onNewChatModalClose}
-                key={user.id}
                 user={user}
                 conversations={conversations}
               />
