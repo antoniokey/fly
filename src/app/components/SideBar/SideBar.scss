@@ -31,6 +31,15 @@
     }
   }
 
+  &__new-chat-selected {
+    width: unset;
+    border-right: unset;
+
+    .side-bar__data {
+      display: none;
+    }
+  }
+
   @media(max-width: 786px) {
     width: 100vw;
     border: 0;

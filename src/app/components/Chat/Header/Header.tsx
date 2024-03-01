@@ -18,12 +18,12 @@ import { Status } from '@/app/enum/users.enum';
 import { useStatus } from '@/app/hooks/useStatus';
 import { useScreenSize } from '@/app/hooks/useScreenSize';
 import { ScreenSize } from '@/app/enum/common.enum';
+import { useChat } from '@/app/hooks/useChat';
 
 import Avatar from '../../Avatar/Avatar';
 
 interface HeaderProps {
   receiver: User;
-  isNewChat: boolean;
   onLeaveChat: () => void;
   onClearChat: () => void;
 }
@@ -31,7 +31,6 @@ interface HeaderProps {
 export default function Header(
   {
     receiver,
-    isNewChat,
     onLeaveChat,
     onClearChat,
   }: HeaderProps,
@@ -43,6 +42,7 @@ export default function Header(
   const menuRef: any = useRef();
 
   const { t: translate } = useTranslation();
+  const { isNewChatSelected, setIsNewChatSelected } = useChat();
 
   const onAvatarClick = (event: any) => {
     if (screenSize.width <= ScreenSize.Mobile) {
@@ -50,12 +50,20 @@ export default function Header(
     }
   };
 
+  const onCloseChat = () =>
+    isNewChatSelected
+      ? setIsNewChatSelected({
+          isNewChatSelected: false,
+          newChatSelectedUser: undefined,
+        })
+      : router.back()
+
   return (
-    <div className="chat-header common-chat-body-section">
+    <div className={`chat-header common-chat-body-section ${isNewChatSelected ? 'new-chat-selected' : ''}`}>
 
       <FaArrowLeft
         className="chat-header__back-button"
-        onClick={() => router.back()}
+        onClick={onCloseChat}
       />
 
       <div className="chat-header__user">
@@ -83,11 +91,11 @@ export default function Header(
       </div>
 
       {
-        isNewChat
+        isNewChatSelected
           ? screenSize.width > ScreenSize.Mobile && (
               <IoCloseOutline
                 className="chat-header__close-button"
-                onClick={() => router.back()}
+                onClick={onCloseChat}
               />
             )
           : (

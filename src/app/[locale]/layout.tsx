@@ -16,6 +16,7 @@ import AuthProvider from '../providers/AuthProvider';
 import SocketProvider from '../providers/SocketProvider';
 import { PageProps } from '../interfaces/common.interfaces';
 import LoaderProvider from '../providers/LoaderProvider';
+import ChatProvider from '../providers/ChatProvider';
 
 export const metadata: Metadata = { title: 'Fly' };
 
@@ -38,7 +39,9 @@ export default async function RootLayout(
             <LoaderProvider>
               <PrimeReactProvider>
                 <SocketProvider>
-                  {children}
+                  <ChatProvider>
+                    {children}
+                  </ChatProvider>
                 </SocketProvider>
               </PrimeReactProvider>
 

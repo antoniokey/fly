@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { UseFormReset } from 'react-hook-form';
 
 import { useSession } from 'next-auth/react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import axios from 'axios';
 
@@ -15,6 +15,7 @@ import { Conversation } from '@/app/interfaces/conversations.interfaces';
 import { User } from '@/app/interfaces/users.interfaces';
 import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
 import { useSocket } from '@/app/hooks/useSocket';
+import { useChat } from '@/app/hooks/useChat';
 
 import Messages from './Messages/Messages';
 import Header from './Header/Header';
@@ -22,29 +23,42 @@ import Footer from './Footer/Footer';
 
 interface ChatProps {
   isOpen: boolean;
-  isNewChat?: boolean;
   conversation?: Conversation;
 }
 
 export default function Chat(
   {
     isOpen,
-    isNewChat = false,
     conversation,
   }: ChatProps,
 ) {
   const session = useSession();
   const router = useRouter();
   const params = useParams();
+  const pathname = usePathname();
 
   const { socket } = useSocket();
   const { t: translate } = useTranslation();
+  const { isNewChatSelected, newChatSelectedUser, setIsNewChatSelected } = useChat();
+
+  const receiver = newChatSelectedUser
+   ? newChatSelectedUser
+   : conversation?.receiver;
 
   useEffect(() => {
     if (socket && conversation?.id) {
       socket.emit('join-room', conversation.id);
     }
   }, [socket, conversation?.id]);
+
+  useEffect(() => {
+    if (isNewChatSelected && conversation) {
+      setIsNewChatSelected({
+        isNewChatSelected: false,
+        newChatSelectedUser: undefined,
+      });
+    }
+  }, [isNewChatSelected, conversation]);
 
   const onSendMessage =
     (resetMessageField: UseFormReset<MessageFieldFormValues>): (data: MessageFieldFormValues) => Promise<void> =>
@@ -57,7 +71,7 @@ export default function Chat(
           } else {
             const createdConversation = (await axios.post(
               '/api/conversations',
-              { receiverId: conversation?.receiver?.id },
+              { receiverId: receiver?.id },
             )).data;
 
             conversationId = createdConversation.id;
@@ -67,10 +81,15 @@ export default function Chat(
             '/api/messages',
             {
               conversationId,
-              receiverId: conversation?.receiver.id,
+              receiverId: receiver?.id,
               message: data.message,
             },
           )).data;
+
+          if (isNewChatSelected) {
+            router.push(`${pathname}/${conversationId}`);
+            router.refresh();
+          }
 
           await socket?.emit(
             'send-message',
@@ -101,14 +120,13 @@ export default function Chat(
   }
 
   return (
-    <div className="chat">
+    <div className={`chat ${isNewChatSelected ? 'chat__new-chat-created' : ''}`}>
       {
-        isOpen
+        isNewChatSelected || isOpen
           ? (
               <div className="chat__body">
                 <Header
-                  receiver={conversation?.receiver as User}
-                  isNewChat={isNewChat}
+                  receiver={receiver as User}
                   onLeaveChat={onLeaveChat}
                   onClearChat={onClearChat}
                 />

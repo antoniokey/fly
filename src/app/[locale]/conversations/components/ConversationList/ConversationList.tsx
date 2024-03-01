@@ -10,6 +10,7 @@ import './ConversationList.scss';
 import { User as IUser } from '@/app/interfaces/users.interfaces';
 import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
 import NewChat from '@/app/components/Chat/NewChat/NewChat';
+import { useChat } from '@/app/hooks/useChat';
 
 import Conversation from '../Conversation/Conversation';
 
@@ -22,8 +23,14 @@ export default function ConversationList({ conversations, users }: ConversationL
   const [isNewChatModalOpen, setIsNewChatModalOpen] = useState(false);
 
   const { t: translate } = useTranslation();
+  const { setIsNewChatSelected } = useChat();
 
   const onNewChatModalClose = () => setIsNewChatModalOpen(false);
+
+  const onNewChatUserSelected = (user: IUser) => {
+    onNewChatModalClose();
+    setIsNewChatSelected({ isNewChatSelected: true, newChatSelectedUser: user });
+  };
 
   return (
     <div className="conversation-list">
@@ -57,7 +64,7 @@ export default function ConversationList({ conversations, users }: ConversationL
         <NewChat
           users={users}
           conversations={conversations}
-          onNewChatModalClose={onNewChatModalClose}
+          onNewChatUserSelected={onNewChatUserSelected}
         />
       </Modal>
     </div>

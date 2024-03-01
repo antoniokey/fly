@@ -9,5 +9,17 @@
     @apply text-[18px] flex justify-center items-center h-full fixed ml-[400px];
 
     width: calc(100% - 400px);
+
+    @media(max-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__new-chat-created {
+    @apply ml-[80px];
+
+    @media(max-width: 768px) {
+      @apply ml-0;
+    }
   }
 }

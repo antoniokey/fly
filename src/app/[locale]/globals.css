@@ -22,10 +22,6 @@
   .common-page {
     width: calc(100% - 400px);
 
-    @media(max-width: 786px) {
-      display: none;
-    }
-
     @media(max-width: 520px) {
       height: 100%;
     }
@@ -38,6 +34,10 @@
     background: white;
     padding-top: 20px;
     width: 290px;
+
+    @media(max-width: 768px) {
+      width: 81%;
+    }
 
     @media(max-width: 520px) {
       width: 100%;
@@ -63,6 +63,14 @@
     width: calc(100% - 400px);
     z-index: 1;
     background: white;
+
+    &.new-chat-selected {
+      width: calc(100% - 80px);
+
+      @media(max-width: 786px) {
+        width: 100%;
+      }
+    }
 
     @media(max-width: 786px) {
       width: calc(100% - 80px);

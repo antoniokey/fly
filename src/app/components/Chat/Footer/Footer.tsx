@@ -12,6 +12,7 @@ import './Footer.scss';
 
 import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
 import ClickOutside from '@/app/hoc/ClickOutside';
+import { useChat } from '@/app/hooks/useChat';
 
 interface FooterProps {
   onSendMessage: (resetMessageField: UseFormReset<MessageFieldFormValues>) =>
@@ -32,6 +33,7 @@ export default function Footer({ onSendMessage }: FooterProps) {
   } = useForm<MessageFieldFormValues>();
 
   const { t: translate } = useTranslation();
+  const { isNewChatSelected } = useChat();
 
   const onEmojiClick = (emojiData: EmojiClickData) =>
     setValue('message', `${getValues().message} ${emojiData.emoji}`);
@@ -41,7 +43,7 @@ export default function Footer({ onSendMessage }: FooterProps) {
   }
 
   return (
-    <div className="chat-footer common-chat-body-section">
+    <div className={`chat-footer common-chat-body-section ${isNewChatSelected ? 'new-chat-selected' : ''}`}>
       <form
         className="chat-footer__form"
         onSubmit={handleSubmit(onSendMessage(reset))}

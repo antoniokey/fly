@@ -9,15 +9,15 @@ import './NewChat.scss';
 
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
 import { User as IUser } from '@/app/interfaces/users.interfaces';
-import User from '@/app/[locale]/users/components/User/User';
+import User from '@/app/components/User/User';
 
 interface NewChatProps {
   conversations: Conversation[];
   users: IUser[];
-  onNewChatModalClose: () => void;
+  onNewChatUserSelected: (user: IUser) => void;
 }
 
-export default function NewChat({ users, conversations, onNewChatModalClose }: NewChatProps) {
+export default function NewChat({ users, conversations, onNewChatUserSelected }: NewChatProps) {
   const [isMultipleUsersSelected, setIsMultipleUsersSelected] = useState(false);
 
   const { t: translate } = useTranslation();
@@ -89,7 +89,7 @@ export default function NewChat({ users, conversations, onNewChatModalClose }: N
               }
 
               <User
-                onClick={onNewChatModalClose}
+                onClick={() => onNewChatUserSelected(user)}
                 user={user}
                 conversations={conversations}
               />

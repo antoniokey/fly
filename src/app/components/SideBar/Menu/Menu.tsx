@@ -3,7 +3,6 @@
 import { TbMessageCircle } from 'react-icons/tb';
 import { IoIosLogOut } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
-import { PiUsersThree } from 'react-icons/pi';
 
 import { useTranslation } from 'react-i18next';
 
@@ -25,9 +24,6 @@ export default function Menu() {
     router.refresh();
   };
 
-  const onUsersClick = (): void => 
-    router.push(`/${i18n.language}/users`);
-
   const onSettingsClick = (): void =>
     router.push(`/${i18n.language}/settings`);
 
@@ -45,10 +41,6 @@ export default function Menu() {
         <TbMessageCircle
           className={getMenuItemClassName('conversations')}
           onClick={onConversationsClick}
-        />
-        <PiUsersThree
-          className={getMenuItemClassName('users')}
-          onClick={onUsersClick}
         />
         <IoSettingsOutline
           className={getMenuItemClassName('settings')}

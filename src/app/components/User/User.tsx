@@ -15,7 +15,7 @@ import { isItemSelected } from '@/app/helpers/common.helpers';
 interface UserProps {
   user: User;
   conversations: Conversation[];
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export default function User({ user, conversations, onClick }: UserProps) {
@@ -36,10 +36,8 @@ export default function User({ user, conversations, onClick }: UserProps) {
     if (alreadyStartedConversation) {
       router.push(`/${i18n.language}/conversations/${alreadyStartedConversation.id}`);
     } else {
-      router.push(`/${i18n.language}/users/${user.id}`);
+      onClick();
     }
-
-    setTimeout(() => onClick && onClick())
   };
   
   return (
