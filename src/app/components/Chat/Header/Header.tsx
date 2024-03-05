@@ -13,36 +13,38 @@ import { Menu } from 'primereact/menu';
 import './Header.scss';
 
 import { getHeaderSettingsMenuItems } from '@/app/constants/chat.constants';
-import { User } from '@/app/interfaces/users.interfaces';
 import { Status } from '@/app/enum/users.enum';
 import { useStatus } from '@/app/hooks/useStatus';
 import { useScreenSize } from '@/app/hooks/useScreenSize';
 import { ScreenSize } from '@/app/enum/common.enum';
 import { useChat } from '@/app/hooks/useChat';
+import { Conversation } from '@/app/interfaces/conversations.interfaces';
 
 import Avatar from '../../Avatar/Avatar';
 
 interface HeaderProps {
-  receiver: User;
+  conversation: Conversation
   onLeaveChat: () => void;
   onClearChat: () => void;
 }
 
 export default function Header(
   {
-    receiver,
     onLeaveChat,
     onClearChat,
+    conversation,
   }: HeaderProps,
 ) {
   const screenSize = useScreenSize();
-  const status = useStatus(receiver?.id);
   const router = useRouter();
 
-  const menuRef: any = useRef();
-
   const { t: translate } = useTranslation();
-  const { isNewChatSelected, setIsNewChatSelected } = useChat();
+  const { isNewChatSelected, newChatSelectedUser, setIsNewChatSelected } = useChat();
+
+  const receiver = newChatSelectedUser || conversation?.participants[0];
+
+  const status = useStatus(newChatSelectedUser?.id || conversation?.participants[0]?.id);
+  const menuRef: any = useRef();
 
   const onAvatarClick = (event: any) => {
     if (screenSize.width <= ScreenSize.Mobile) {
@@ -56,11 +58,10 @@ export default function Header(
           isNewChatSelected: false,
           newChatSelectedUser: undefined,
         })
-      : router.back()
+      : router.back();
 
   return (
     <div className={`chat-header common-chat-body-section ${isNewChatSelected ? 'new-chat-selected' : ''}`}>
-
       <FaArrowLeft
         className="chat-header__back-button"
         onClick={onCloseChat}
@@ -76,8 +77,8 @@ export default function Header(
 
         <div className="chat-header__user-info">
           <div className="chat-header__first-last-name">
-            <span>{receiver.first_name}</span>
-            <span>{receiver.last_name}</span>
+            <span>{receiver?.first_name}</span>
+            <span>{receiver?.last_name}</span>
           </div>
 
           {

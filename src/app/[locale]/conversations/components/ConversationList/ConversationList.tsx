@@ -25,10 +25,8 @@ export default function ConversationList({ conversations, users }: ConversationL
   const { t: translate } = useTranslation();
   const { setIsNewChatSelected } = useChat();
 
-  const onNewChatModalClose = () => setIsNewChatModalOpen(false);
-
-  const onNewChatUserSelected = (user: IUser) => {
-    onNewChatModalClose();
+  const onNewSingleChatSelected = (user: IUser) => {
+    setIsNewChatModalOpen(false);
     setIsNewChatSelected({ isNewChatSelected: true, newChatSelectedUser: user });
   };
 
@@ -56,7 +54,7 @@ export default function ConversationList({ conversations, users }: ConversationL
       <Modal
         className="conversation-list__new-chat-modal"
         isOpen={isNewChatModalOpen}
-        onRequestClose={onNewChatModalClose}
+        onRequestClose={() => setIsNewChatModalOpen(false)}
         shouldFocusAfterRender={false}
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
@@ -64,7 +62,8 @@ export default function ConversationList({ conversations, users }: ConversationL
         <NewChat
           users={users}
           conversations={conversations}
-          onNewChatUserSelected={onNewChatUserSelected}
+          closeNewChatModal={() => setIsNewChatModalOpen(false)}
+          onNewSingleChatSelected={onNewSingleChatSelected}
         />
       </Modal>
     </div>

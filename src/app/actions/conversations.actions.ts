@@ -15,33 +15,34 @@ export const getConversations = async (): Promise<Conversation[]> => {
         has: session?.user?.id,
       },
     },
-  });
-
-  const conversationsReceiverIds = conversations.map(conversation => {
-    const receiverId = conversation.participant_ids.filter(participant_id =>
-      participant_id !== session?.user?.id,
-    )[0];
-
-    return receiverId;
-  });
-  
-  const receivers: User[] = await prisma.users.findMany({
-    where: {
-      id: {
-        in: conversationsReceiverIds,
-      },
+    include: {
+      messages: true,
     },
   });
 
+  const conversationsParticipantIds = conversations.map(conversation =>
+    conversation.participant_ids
+  );
+  
+  const conversationsParticipants: User[][] = await Promise.all(
+    conversationsParticipantIds.map(conversationParticipantIds =>
+      prisma.users.findMany({
+        where: {
+          id: {
+            in: conversationParticipantIds,
+          },
+        },
+      }),
+    ),
+  );
+
   return conversations.map((conversation, index) => ({
     ...conversation,
-    receiver: excludeFields<User>(receivers[index], ['password']),
+    participants: excludeFields<User[]>(conversationsParticipants[index], ['password']),
   })) as Conversation[];
 }
 
 export const getConversation = async (id: number): Promise<Conversation> => {
-  const session = await getServerSession(nextAuthOptions);
-
   const conversation: ConversationResponse | null = await prisma.conversations.findFirst({
     where: { id },
     include: {
@@ -49,18 +50,16 @@ export const getConversation = async (id: number): Promise<Conversation> => {
     },
   });
 
-  const conversationsReceiverId = (conversation?.participant_ids || []).filter(participant_id =>
-    participant_id !== session?.user?.id,
-  )[0];
-
-  const receiver: User | null = await prisma.users.findFirst({
+  const participants: User[] = await prisma.users.findMany({
     where: {
-      id: conversationsReceiverId,
+      id: {
+        in: conversation?.participant_ids || [],
+      },
     },
   });
 
   return {
     ...conversation,
-    receiver: excludeFields<User | null>(receiver, ['password']),
+    participants: excludeFields<User[]>(participants, ['password']),
   } as Conversation;
 };

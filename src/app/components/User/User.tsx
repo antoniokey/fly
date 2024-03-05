@@ -15,10 +15,11 @@ import { isItemSelected } from '@/app/helpers/common.helpers';
 interface UserProps {
   user: User;
   conversations: Conversation[];
+  shouldComputeConversations: boolean;
   onClick: () => void;
 }
 
-export default function User({ user, conversations, onClick }: UserProps) {
+export default function User({ user, conversations, shouldComputeConversations, onClick }: UserProps) {
   const status = useStatus(user.id);
   const router = useRouter();
   const pathname = usePathname();
@@ -31,10 +32,14 @@ export default function User({ user, conversations, onClick }: UserProps) {
     );
 
   const onUserClick = (): void => {
-    const alreadyStartedConversation = getAlreadyStartedConversation();
+    if (shouldComputeConversations) {
+      const alreadyStartedConversation = getAlreadyStartedConversation();
 
-    if (alreadyStartedConversation) {
-      router.push(`/${i18n.language}/conversations/${alreadyStartedConversation.id}`);
+      if (alreadyStartedConversation) {
+        router.push(`/${i18n.language}/conversations/${alreadyStartedConversation.id}`);
+      } else {
+        onClick();
+      }
     } else {
       onClick();
     }

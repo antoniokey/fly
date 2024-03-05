@@ -12,10 +12,10 @@ import axios from 'axios';
 import './Chat.scss';
 
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
-import { User } from '@/app/interfaces/users.interfaces';
 import { MessageFieldFormValues } from '@/app/interfaces/chat.interfaces';
 import { useSocket } from '@/app/hooks/useSocket';
 import { useChat } from '@/app/hooks/useChat';
+import { getReceiverIds } from '@/app/helpers/chat.helpers';
 
 import Messages from './Messages/Messages';
 import Header from './Header/Header';
@@ -41,10 +41,6 @@ export default function Chat(
   const { t: translate } = useTranslation();
   const { isNewChatSelected, newChatSelectedUser, setIsNewChatSelected } = useChat();
 
-  const receiver = newChatSelectedUser
-   ? newChatSelectedUser
-   : conversation?.receiver;
-
   useEffect(() => {
     if (socket && conversation?.id) {
       socket.emit('join-room', conversation.id);
@@ -64,37 +60,43 @@ export default function Chat(
     (resetMessageField: UseFormReset<MessageFieldFormValues>): (data: MessageFieldFormValues) => Promise<void> =>
       async (data: MessageFieldFormValues): Promise<void> => {
         if (data.message) {
-          let conversationId;
+          let usedConversation = conversation;
 
-          if (conversation?.id) {
-            conversationId = conversation.id;
-          } else {
-            const createdConversation = (await axios.post(
+          if (!usedConversation) {
+            usedConversation = (await axios.post(
               '/api/conversations',
-              { receiverId: receiver?.id },
+              {
+                participant_ids: isNewChatSelected
+                  ? [
+                      session.data?.user.id,
+                      newChatSelectedUser?.id,
+                    ]
+                  : conversation?.participant_ids,
+              },
             )).data;
-
-            conversationId = createdConversation.id;
           }
 
           const createdMessage = (await axios.post(
             '/api/messages',
             {
-              conversationId,
-              receiverId: receiver?.id,
+              conversationId: usedConversation?.id,
               message: data.message,
+              receiverIds: getReceiverIds(
+                usedConversation?.participant_ids || [],
+                session.data?.user.id,
+              ),
             },
           )).data;
 
           if (isNewChatSelected) {
-            router.push(`${pathname}/${conversationId}`);
+            router.push(`${pathname}/${usedConversation?.id}`);
             router.refresh();
           }
 
           await socket?.emit(
             'send-message',
             {
-              roomId: conversationId,
+              roomId: usedConversation?.id,
               message: createdMessage,
             },
           );
@@ -126,7 +128,7 @@ export default function Chat(
           ? (
               <div className="chat__body">
                 <Header
-                  receiver={receiver as User}
+                  conversation={conversation as Conversation}
                   onLeaveChat={onLeaveChat}
                   onClearChat={onClearChat}
                 />

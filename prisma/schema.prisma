@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL")
+  url      = env("POSTGRES_PRISMA_URL")
 }
 
 model users {
@@ -24,6 +24,8 @@ model conversations {
   participant_ids Int[]      @default([])
   created_at      DateTime   @default(now())
   updated_at      DateTime   @default(now())
+  group_name      String?
+  is_group        Boolean    @default(false)
   messages        messages[]
 }
 
@@ -31,7 +33,7 @@ model messages {
   id              Int           @id @default(autoincrement())
   conversation_id Int
   sender_id       Int
-  receiver_id     Int
+  receiver_ids    Int[]      @default([])
   message         String
   created_at      DateTime      @default(now())
   updated_at      DateTime      @default(now())

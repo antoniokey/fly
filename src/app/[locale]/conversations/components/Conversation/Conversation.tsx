@@ -6,17 +6,17 @@ import { useTranslation } from 'react-i18next';
 
 import './Conversation.scss';
 
-import Avatar from '@/app/components/Avatar/Avatar';
 import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
-import { useStatus } from '@/app/hooks/useStatus';
 import { isItemSelected } from '@/app/helpers/common.helpers';
+
+import GroupConversation from './GroupConversation/GroupConversation';
+import SingleConversation from './SingleConversation/SingleConversation';
 
 interface ConversationProps {
   conversation: IConversation;
 }
 
 export default function Conversation({ conversation }: ConversationProps) {
-  const status = useStatus(conversation.receiver?.id);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -30,20 +30,11 @@ export default function Conversation({ conversation }: ConversationProps) {
       className={`conversation ${isItemSelected(pathname || '', conversation.id) ? 'selected' : ''}`}
       onClick={onConversationClick}
     >
-      <Avatar
-        user={conversation.receiver}
-        status={status}
-        isEditable={false}
-      />
-
-      <div className="conversation__info">
-        <span className="conversation__first-name">
-          {conversation.receiver?.first_name || ''}
-        </span>
-        <span className="conversation__last-name">
-          {conversation.receiver?.last_name || ''}
-        </span>
-      </div>
+      {
+        conversation.is_group
+          ? <GroupConversation conversation={conversation} />
+          : <SingleConversation conversation={conversation} />
+      }
     </div>
   );
 }

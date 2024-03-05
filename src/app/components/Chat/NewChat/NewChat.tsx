@@ -5,6 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import { useForm } from 'react-hook-form';
 
+import { useSession } from 'next-auth/react';
+import { usePathname, useRouter } from 'next/navigation';
+
+import axios from 'axios';
+
 import './NewChat.scss';
 
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
@@ -14,25 +19,54 @@ import User from '@/app/components/User/User';
 interface NewChatProps {
   conversations: Conversation[];
   users: IUser[];
-  onNewChatUserSelected: (user: IUser) => void;
+  closeNewChatModal: () => void;
+  onNewSingleChatSelected: (user: IUser) => void;
 }
 
-export default function NewChat({ users, conversations, onNewChatUserSelected }: NewChatProps) {
+export default function NewChat(
+  {
+    users,
+    conversations,
+    closeNewChatModal,
+    onNewSingleChatSelected
+  }: NewChatProps,
+) {
   const [isMultipleUsersSelected, setIsMultipleUsersSelected] = useState(false);
+
+  const session = useSession();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const { t: translate } = useTranslation();
 
-  const { register } = useForm({
+  const { register, getValues } = useForm({
     defaultValues: {
-      selectedUserIds: [],
+      participant_ids: [],
       group_name: translate('conversations.new_chat.new_group'),
     },
   });
 
   const onMultipleUsersMenuItemClick = () => setIsMultipleUsersSelected(!isMultipleUsersSelected);
 
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
+    const formData = getValues();
 
+    const createdConversation = (await axios.post(
+      '/api/conversations',
+      {
+        is_group: isMultipleUsersSelected,
+        group_name: formData.group_name,
+        participant_ids: [
+          session.data?.user.id,
+          ...formData.participant_ids.map(participant_id => +participant_id),
+        ],
+      },
+    )).data;
+
+    closeNewChatModal();
+
+    router.push(`${pathname}/${createdConversation.id}`);
+    router.refresh();
   };
 
   return (
@@ -83,15 +117,16 @@ export default function NewChat({ users, conversations, onNewChatUserSelected }:
                     className="new-chat-modal__checkbox"
                     type="checkbox"
                     value={user.id}
-                    {...register('selectedUserIds')}
+                    {...register('participant_ids')}
                   />
                 )
               }
 
               <User
-                onClick={() => onNewChatUserSelected(user)}
                 user={user}
                 conversations={conversations}
+                shouldComputeConversations={!isMultipleUsersSelected}
+                onClick={() => !isMultipleUsersSelected ? onNewSingleChatSelected(user) : null}
               />
             </div>
           ))}

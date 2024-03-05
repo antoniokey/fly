@@ -1,11 +1,7 @@
 .conversation {
-  @apply flex items-center gap-[15px] p-[10px] hover:cursor-pointer hover:bg-gray-100 hover:rounded-[10px];
+  @apply flex gap-[15px] p-[10px] hover:cursor-pointer hover:bg-gray-100 hover:rounded-[10px];
 
   &.selected {
     @apply bg-gray-100 rounded-[10px]
-  }
-
-  &__info {
-    @apply flex gap-[5px] font-bold;
   }
 }

@@ -1,0 +1,9 @@
+.single-conversation {
+  &__info {
+    @apply flex flex-col justify-between;
+  }
+
+  &__letters {
+    @apply flex gap-[5px] font-bold;
+  }
+}

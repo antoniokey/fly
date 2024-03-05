@@ -9,7 +9,7 @@ export async function POST(request: Request): Promise<NextResponse> {
 
   const {
     conversationId,
-    receiverId,
+    receiverIds,
     message,
   } = await request.json();
 
@@ -18,7 +18,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       message,
       conversation_id: conversationId,
       sender_id: session?.user.id,
-      receiver_id: receiverId,
+      receiver_ids: receiverIds,
     },
   });
 
