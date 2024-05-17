@@ -85,7 +85,7 @@ export default function NewChat(
           <span className="new-chat-modal__menu-item-label">
             {
               isMultipleUsersSelected
-                ? translate('conversations.new_chat.cancel')
+                ? translate('conversations.actions.cancel')
                 : translate('conversations.new_chat.new_group')
             }
           </span>
@@ -139,7 +139,7 @@ export default function NewChat(
                 className="new-chat-modal__save-button"
                 onClick={onSaveClick}
               >
-                {translate('conversations.new_chat.actions.save')}
+                {translate('conversations.actions.save')}
               </button>
             </div>
           )

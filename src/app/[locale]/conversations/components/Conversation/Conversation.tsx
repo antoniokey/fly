@@ -9,7 +9,7 @@ import './Conversation.scss';
 import { Conversation as IConversation } from '@/app/interfaces/conversations.interfaces';
 import { isItemSelected } from '@/app/helpers/common.helpers';
 
-import GroupConversation from './GroupConversation/GroupConversation';
+import GroupConversation from '../../../../components/Conversation/GroupConversation/GroupConversation';
 import SingleConversation from './SingleConversation/SingleConversation';
 
 interface ConversationProps {
@@ -32,7 +32,11 @@ export default function Conversation({ conversation }: ConversationProps) {
     >
       {
         conversation.is_group
-          ? <GroupConversation conversation={conversation} />
+          ? <GroupConversation
+              conversation={conversation}
+              isEditGroupNameEnabled={false}
+              hasSentMessagePersonIcon
+            />
           : <SingleConversation conversation={conversation} />
       }
     </div>

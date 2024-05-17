@@ -21,6 +21,7 @@ import { useChat } from '@/app/hooks/useChat';
 import { Conversation } from '@/app/interfaces/conversations.interfaces';
 
 import Avatar from '../../Avatar/Avatar';
+import GroupConversation from '../../Conversation/GroupConversation/GroupConversation';
 
 interface HeaderProps {
   conversation: Conversation
@@ -67,28 +68,38 @@ export default function Header(
         onClick={onCloseChat}
       />
 
-      <div className="chat-header__user">
-        <Avatar
-          status={status}
-          user={receiver}
-          isEditable={false}
-          onClick={onAvatarClick}
-        />
+      <div
+        className={
+          `chat-header__user ${conversation?.is_group ? 'group-conversation-header' : ''}`
+        }
+      >
+        {
+          conversation?.is_group
+            ? <GroupConversation conversation={conversation} isEditGroupNameEnabled />
+            : <>
+                <Avatar
+                  status={status}
+                  user={receiver}
+                  isEditable={false}
+                  onClick={onAvatarClick}
+                />
 
-        <div className="chat-header__user-info">
-          <div className="chat-header__first-last-name">
-            <span>{receiver?.first_name}</span>
-            <span>{receiver?.last_name}</span>
-          </div>
+                <div className="chat-header__user-info">
+                  <div className="chat-header__first-last-name">
+                    <span>{receiver?.first_name}</span>
+                    <span>{receiver?.last_name}</span>
+                  </div>
 
-          {
-            status === Status.Online && (
-              <div className="chat-header__status">
-                {translate(`users.status.${Status.Online}`)}
-              </div>
-            )
-          }
-        </div>
+                  {
+                    status === Status.Online && (
+                      <div className="chat-header__status">
+                        {translate(`users.status.${Status.Online}`)}
+                      </div>
+                    )
+                  }
+                </div>
+              </>
+        }
       </div>
 
       {

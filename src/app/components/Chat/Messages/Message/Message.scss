@@ -1,19 +1,41 @@
-.chat-messages__message {
-  @apply flex gap-[15px] py-[5px] px-[10px] rounded-[15px] bg-primary w-fit;
+.chat-messages {
+  &__message-container {
+    @apply flex gap-[5px];
 
-  &.sender {
-    @apply rounded-br-[0px] self-end ml-[50px];
+    &.sender {
+      @apply self-end ml-[50px];
+
+      .chat-messages__message {
+        border-bottom-right-radius: 0;
+      }
+    }
+
+    &.receiver {
+      margin-right: 50px;
+
+      .chat-messages__message {
+        border-bottom-left-radius: 0;
+      }
+    }
   }
 
-  &.receiver {
-    @apply rounded-bl-[0px] mr-[50px];
+  &__message {
+    @apply flex gap-[15px] py-[5px] px-[10px] rounded-[15px] bg-primary w-fit;
+  
+    &__text {
+      color: white;
+    }
+  
+    &__created-time {
+      @apply text-[12px] self-end text-gray-200;
+    }
   }
 
-  &__text {
-    color: white;
-  }
+  .avatar {
+    @apply w-[20px] h-[20px] min-h-[20px] min-w-[20px] self-end;
 
-  &__created-time {
-    @apply text-[12px] self-end text-gray-200;
+    &__first-letters {
+      font-size: 10px;
+    }
   }
 }

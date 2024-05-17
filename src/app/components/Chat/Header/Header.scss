@@ -18,6 +18,18 @@
       }
     }
 
+    &.group-conversation-header {
+      .avatar {
+        @media(max-width: 520px) {
+          position: unset;
+        }
+      }
+      
+      @media(max-width: 520px) {
+        align-items: unset;
+      }
+    }
+
     @media(max-width: 520px) {
       @apply flex-row-reverse w-full items-center;
     }
@@ -77,5 +89,31 @@
     @media(max-width: 520px) {
       @apply block text-primary text-[23px] absolute cursor-pointer;
     }
+  }
+
+  &__avatars {
+    @apply flex flex-col gap-[5px];
+  }
+
+  &__avatar-row {
+    &:first-child {
+      margin: auto;
+    }
+
+    &:last-child {
+      @apply flex gap-[5px];
+    }
+
+    .avatar {
+      @apply min-w-[30px] min-h-[30px] h-[30px] w-[30px];
+
+      &__first-letters {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__group-name {
+    font-weight: bold;
   }
 }

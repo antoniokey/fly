@@ -40,12 +40,13 @@
     "conversations_list_title": "Mensajes",
     "new_chat": {
       "new_group": "Nuevo grupo",
-      "cancel": "Cancelar",
-      "enter_group_name": "Introduzca el nombre del grupo",
-      "actions": {
-        "save": "Ahorrar"
-      }
-    }
+      "enter_group_name": "Introduzca el nombre del grupo"
+    },
+    "actions": {
+      "save": "Ahorrar",
+      "cancel": "Cancelar"
+    },
+    "group_name_was_successfully_updated": "El nombre del grupo se actualizó correctamente."
   },
   "users": {
     "users_list_title": "Gente",
